@@ -74,5 +74,5 @@ public class ManageEmployeeHandler implements CommandHandler {
     // 사원 삭제 처리
     private void handleDelete(String employeeId) {
         employeeService.deleteEmployee(employeeId); // 서비스 호출하여 사원 삭제
-    }//나는 바보다
+    }//나는 바보다 재원이형은 천재다
 }
