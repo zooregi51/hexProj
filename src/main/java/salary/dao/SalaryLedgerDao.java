@@ -43,6 +43,8 @@ public class SalaryLedgerDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
+			// join하는 구문으로 수정할 필요 있음
+			// 구분, 성명, 입사일 부서, 직위
 			pstmt = conn.prepareStatement("select salary_emp_no, salary_salary, salary_food from salary\r\n"
 					+ "where substr(salary_num, 0, 7) = ?");
 			
