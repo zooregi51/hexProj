@@ -3,13 +3,13 @@ package salary.model;
 import java.util.Date;
 
 public class Employee {
-	private String empId;
+	private Integer empId;
 	private String empName;
 	private String empForm;
 	private String empDepart;
 	private String empPos;
 	private Date empHiredDate;
-	public Employee(String empId, String empName, String empForm, String empDepart, String empPos,
+	public Employee(Integer empId, String empName, String empForm, String empDepart, String empPos,
 			Date empHiredDate) {
 		this.empId = empId;
 		this.empName = empName;
@@ -18,7 +18,7 @@ public class Employee {
 		this.empPos = empPos;
 		this.empHiredDate = empHiredDate;
 	}
-	public String getEmpId() {
+	public Integer getEmpId() {
 		return empId;
 	}
 	public String getEmpName() {

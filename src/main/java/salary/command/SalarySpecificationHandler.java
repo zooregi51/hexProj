@@ -25,20 +25,15 @@ private GetSalarySpecificationService specSer = new GetSalarySpecificationServic
 			// 해당 기간 선택한 직원의 상세 급여명세서 출력
 			Salary spec = specSer.getSalary(empNo, year, month);
 			req.setAttribute("specDetail", spec);
-			return "/WEB-INF/view/salary/salarySpecificationDetail.jsp?term=";
+			return "/WEB-INF/view/salary/salarySpecificationDetail.jsp?empNo=" + empNo + "year=" + year + "month=" + month;
 		} else {
-			if(year != null) {
-				ArrayList<SalarySpecification> spec = specSer.getSalarySpecification(year, month);
-				req.setAttribute("specDetail", spec);
-			}
-			else {
-				// year, month 없으면 올해 이번달로
-				LocalDate now = LocalDate.now();
+			LocalDate now = LocalDate.now();
+			if(year == null)
+				year = now.getYear() + "";	
+			if(month == null)
 				month = now.getMonth() + "";
-				year = now.getYear() + "";
-				ArrayList<SalarySpecification> spec = specSer.getSalarySpecification(year, month);
-				req.setAttribute("specDetail", spec);
-			}
+			ArrayList<SalarySpecification> spec = specSer.getSalarySpecification(year, month);
+			req.setAttribute("specDetail", spec);
 			return "/WEB-INF/view/salary/salarySpecification.jsp?year=" + year + "month=" + month;
 		}
 		

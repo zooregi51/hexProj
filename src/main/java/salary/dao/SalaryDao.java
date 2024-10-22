@@ -31,7 +31,7 @@ public class SalaryDao {
 			// 그럼 저 밑에서 convert할 때 인자를 두 개 할 필요없이 하나만 해도대겠지
 			// 기본적으로 employment랑 join을 하는 query를 만들어야
 			
-			List<Salary> result = new ArrayList()<>();
+			List<Salary> result = new ArrayList<>();
 			while(rs.next()) {
 				result.add(convertSalary(rs, null)); // employee 결과값 넣을것
 			}
@@ -82,8 +82,11 @@ public class SalaryDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("select salary_emp_no, salary_salary, salary_food from salary\r\n"
-					+ "where substr(salary_num, 0, 7) = ?");
+			pstmt = conn.prepareStatement("select b.empform, b.name, a.salary_emp_no, a.salary_salary, a.salary_food \r\n"
+					+ "from salary a,\r\n"
+					+ "employee b\r\n"
+					+ "where substr(salary_num, 0, 7) = ?\r\n"
+					+ "and a.salary_emp_no = b.empno;");
 			
 			pstmt.setString(1, year + '-' + month);
 			rs = pstmt.executeQuery();
@@ -98,8 +101,8 @@ public class SalaryDao {
 		}
 	}
 
-	private SalarySpecification convertSpecification(ResultSet rs) {
+	private SalarySpecification convertSpecification(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
-		return new SalarySpecification(null, null, null);
+		return new SalarySpecification(rs.getString("empform"), rs.getString("empname"), rs.getInt("salary_salary") + rs.getInt("salary_food"), rs.getInt("salary_emp_no"));
 	}
 }
