@@ -50,7 +50,7 @@ public class SalaryLedgerDao {
 					+ "from salary a,\r\n"
 					+ "employee b\r\n"
 					+ "where substr(a.salary_num, 0, 7) = ?\r\n"
-					+ "and a.salary_emp_no = b.empno;");
+					+ "and a.salary_emp_no = b.empno");
 			
 			pstmt.setString(1, yearMonth);
 			rs = pstmt.executeQuery();

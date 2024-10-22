@@ -63,18 +63,8 @@ public class SalaryDao {
 		}
 	}
 
-	private Salary convertSalary(ResultSet rs, ResultSet emrs) throws SQLException{
-		
-		Payment p = new Payment(rs.getInt("salBasicSal"), rs.getInt("salFood"), 
-				rs.getInt("salChildCare"), rs.getInt("salPositionSal"), 
-				rs.getInt("salLongSer"), rs.getInt("salOncall"), 
-				rs.getInt("salBonus"), rs.getInt("salHoliday"));
-		
-		Employee e = new Employee(emrs.getString("empNum"), emrs.getString("empName"),
-				emrs.getString("empForm"), emrs.getString("empDepart"), 
-				emrs.getString("empPos"), emrs.getDate("empHireDate"));
-		
-		return new Salary(rs.getInt("salNum"),	e,  p, d);
+	private Salary convertSalary(ResultSet rs) throws SQLException{		
+		return new Salary(rs.getString("salary_num"), new Employee(null, rs.getString("name"), null, rs.getString("dep"), null, null), new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null));
 	}
 
 	public ArrayList<SalarySpecification> getSpecification(Connection conn, String year, String month) throws SQLException {
@@ -86,7 +76,7 @@ public class SalaryDao {
 					+ "from salary a,\r\n"
 					+ "employee b\r\n"
 					+ "where substr(salary_num, 0, 7) = ?\r\n"
-					+ "and a.salary_emp_no = b.empno;");
+					+ "and a.salary_emp_no = b.empno");
 			
 			pstmt.setString(1, year + '-' + month);
 			rs = pstmt.executeQuery();
@@ -104,5 +94,42 @@ public class SalaryDao {
 	private SalarySpecification convertSpecification(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
 		return new SalarySpecification(rs.getString("empform"), rs.getString("empname"), rs.getInt("salary_salary") + rs.getInt("salary_food"), rs.getInt("salary_emp_no"));
+	}
+
+	public ArrayList<Salary> getTransferNeeded(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		// 해당 월의 인원들 급여 내역 출력
+		try {
+			pstmt = conn.prepareStatement("SELECT b.name, b.dep, a.salary_salary, a.salary_food\r\n"
+					+ "FROM salary a,\r\n"
+					+ "employee b\r\n"
+					+ "where salary_transfer_date is null\r\n"
+					+ "and a.salary_emp_no = b.empno");
+			
+			rs = pstmt.executeQuery();
+			ArrayList<Salary> result = new ArrayList<Salary>();
+			while(rs.next()) {
+				result.add(convertSalary(rs));
+			}
+			return result;
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+
+	public int setTransferDate(Connection conn) throws SQLException {
+		PreparedStatement pstmt = null;
+		// 해당 월의 인원들 급여 내역 출력
+		try {
+			pstmt = conn.prepareStatement("update salary\r\n"
+					+ "    set salary_transfer_date = sysdate\r\n"
+					+ "    where salary_transfer_date is null");
+			
+			return pstmt.executeUpdate();
+		}finally {
+			JdbcUtil.close(pstmt);
+		}
 	}
 }
