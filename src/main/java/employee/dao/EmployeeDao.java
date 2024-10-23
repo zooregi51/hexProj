@@ -53,4 +53,22 @@ public class EmployeeDao {
 		return new Employee(rs.getInt("employee_Id"),rs.getString("employee_Form"),rs.getString("employee_KrName"),rs.getString("employee_EnName"),rs.getDate("employee_Date"),rs.getDate("employee_ResignDate"),rs.getString("employee_Department"),rs.getString("employee_Position"),rs.getDate("employee_ResidentNumber"),rs.getString("employee_Address"),rs.getInt("employee_HomeNumber"),rs.getInt("employee_MobileNumber"),rs.getString("employee_Email"),rs.getString("employee_Sns"),rs.getString("employee_Ex"
 				));
 	}
+	public Employee selectById(Connection conn,int no)throws SQLException{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement("select * from employee where employee_Id=?");
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			Employee employee=null;
+			if(rs.next()) {
+				employee = new Employee(rs.getInt("employee_Id"),rs.getString("employee_Form"),rs.getString("employee_KrName"),rs.getString("employee_EnName"),rs.getDate("employee_Date"),rs.getDate("employee_ResignDate"),rs.getString("employee_Department"),rs.getString("employee_Position"),rs.getDate("employee_ResidentNumber"),rs.getString("employee_Address"),rs.getInt("employee_HomeNumber"),rs.getInt("employee_MobileNumber"),rs.getString("employee_Email"),rs.getString("employee_Sns"),rs.getString("employee_Ex"));
+			}
+			return employee;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+			// : handle finally clause
+		}
+	}
 }
