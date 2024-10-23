@@ -74,7 +74,7 @@ public class RegisterEmployeeHandler implements CommandHandler {
 		// 사원 객체를 반환 (new Employee 안에 모든 데이터를 넣음)
 		return new Employee(Integer.parseInt(req.getParameter("empNo")), req.getParameter("empForm"),
 				req.getParameter("name"), hiredDate, retiredDate, // 변환된 Date 객체를 이 자리에 넣음
-				req.getParameter("dep"), req.getParameter("registrationNum"), req.getParameter("address"),
+				req.getParameter("dep"), req.getParameter("position"), req.getParameter("registrationNum"), req.getParameter("address"),
 				req.getParameter("phone"), req.getParameter("email"), req.getParameter("other"),
 				Integer.parseInt(req.getParameter("salary")));
 	}

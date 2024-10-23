@@ -11,6 +11,7 @@ public class Employee {
 	private Date hiredDate; // 채용일
 	private Date retiredDate; // 퇴사일
 	private String dep; // 부서
+	private String position; // 직위
 	private String registrationNum; // 주민등록번호
 	private String address; // 주소
 	private String phone; // 전화번호
@@ -20,12 +21,15 @@ public class Employee {
 
 	// 생성자: 사원 정보를 받아 초기화.
 	public Employee(Integer empNo, String empForm, String name, Date hiredDate, Date retiredDate, String dep,
-			String registrationNum, String address, String phone, String email, String other, Integer salary) {
+			String position, String registrationNum, String address, String phone, String email, String other,
+			Integer salary) {
 		this.empNo = empNo;
 		this.empForm = empForm;
 		this.name = name;
 		this.hiredDate = hiredDate;
+		this.retiredDate = retiredDate;
 		this.dep = dep;
+		this.position = position;
 		this.registrationNum = registrationNum;
 		this.address = address;
 		this.phone = phone;
@@ -57,6 +61,10 @@ public class Employee {
 
 	public String getDep() {
 		return dep;
+	}
+
+	public String getPosition() {
+		return position;
 	}
 
 	public String getRegistrationNum() {
