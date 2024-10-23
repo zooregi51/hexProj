@@ -9,6 +9,7 @@ import java.util.List;
 
 import jdbc.JdbcUtil;
 import salary.model.Employee;
+import salary.model.ItemizedLedger;
 import salary.model.Payment;
 import salary.model.Salary;
 import salary.model.SalarySpecification;
@@ -155,5 +156,91 @@ public class SalaryDao {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
+	}
+
+	public ArrayList<ItemizedLedger> getItemLedger(Connection conn, String item, String year) throws SQLException {
+		String stmt = "select b.empform, b.name, b.dep,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/01' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-01\", \r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/02' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-02\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/03' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-03\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/04' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-04\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/05' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-05\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/06' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-06\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/07' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-07\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/08' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-08\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/09' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-09\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/10' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-10\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/11' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-11\" ,\r\n"
+				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
+				+ "/12' then a." + "salary_" + item
+				+ " end) as \"20" + year
+				+ "-12\" \r\n"
+				+ "from salary a,\r\n"
+				+ "employee b\r\n"
+				+ "where a.salary_transfer_date is not null\r\n"
+				+ "and a.salary_emp_no = b.empno\r\n"
+				+ "and substr(a.salary_transfer_date, 1, 2) = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		// 해당 월의 인원들 급여 내역 출력
+		try {
+			pstmt = conn.prepareStatement(stmt);
+			pstmt.setString(1, year);
+			rs = pstmt.executeQuery();
+			ArrayList<ItemizedLedger> result = new ArrayList<>();
+			while(rs.next()) {
+				result.add(convertItemizeLedger(rs, year));
+			}
+			return result;
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
+
+	private ItemizedLedger convertItemizeLedger(ResultSet rs, String year) throws SQLException {
+		ArrayList<Integer> sal = new ArrayList<>();
+		for(int i = 1; i <= 12; ++i) {
+			String now = year + '-';
+			if(i < 10)
+				now += '0' + i;
+			else
+				now += i;
+			sal.add(rs.getInt(now));
+		}
+		return new ItemizedLedger(rs.getString("empform"), rs.getString("empname"), rs.getString("dep"), sal);
 	}
 }

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import jdbc.connection.ConnectionProvider;
 import salary.dao.SalaryDao;
+import salary.model.ItemizedLedger;
 import salary.model.Salary;
 import salary.model.SalarySpecification;
 
@@ -38,5 +39,15 @@ public class GetSalarySpecificationService {
 			throw new RuntimeException(e);
 		}
 		
+	}
+
+
+	public ArrayList<ItemizedLedger> getItemLedger(String item, String year) {
+		try(Connection conn = ConnectionProvider.getConnection()){
+			ArrayList<ItemizedLedger> spec = ledD.getItemLedger(conn, item, year);
+			return spec;
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }
