@@ -1,4 +1,4 @@
-package mvc.command.defaultEnvironment;
+package mvc.command.employee;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import mvc.command.CommandHandler;
-import mvc.model.defaultEnvironment.Employee;
-import mvc.service.defaultEnvironment.RegisterEmployeeService;
+import mvc.model.employee.Employee;
+import mvc.service.employee.RegisterEmployeeService;
 
 public class RegisterEmployeeHandler implements CommandHandler {
 	private static final String FORM_VIEW = "/WEB-INF/view/newEmployeeForm.jsp";
@@ -61,17 +61,19 @@ public class RegisterEmployeeHandler implements CommandHandler {
 		// date 부분에 Date 변환 코드 적용
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date hiredDate = null;
+		Date retiredDate = null;
 
 		try {
 			// 채용일을 문자열에서 Date로 변환
 			hiredDate = dateFormat.parse(req.getParameter("hiredDate"));
+			retiredDate = dateFormat.parse(req.getParameter("retiredDate"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		// 사원 객체를 반환 (new Employee 안에 모든 데이터를 넣음)
 		return new Employee(Integer.parseInt(req.getParameter("empNo")), req.getParameter("empForm"),
-				req.getParameter("name"), hiredDate, // 변환된 Date 객체를 이 자리에 넣음
+				req.getParameter("name"), hiredDate, retiredDate, // 변환된 Date 객체를 이 자리에 넣음
 				req.getParameter("dep"), req.getParameter("registrationNum"), req.getParameter("address"),
 				req.getParameter("phone"), req.getParameter("email"), req.getParameter("other"),
 				Integer.parseInt(req.getParameter("salary")));

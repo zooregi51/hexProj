@@ -1,27 +1,26 @@
-package mvc.model.defaultEnvironment;
+package mvc.model.employee;
 
 import java.util.Date;
 import java.util.Map;
 
 public class Employee {
 
-	private Integer empNo;           // 사원 번호
-	private String empForm;          // 고용 형태
-	private String name;             // 사원 이름
-	private Date hiredDate;          // 채용일
-	private String dep;              // 부서
-	private String registrationNum;  // 등록 번호 (주민등록번호 등)
-	private String address;          // 주소
-	private String phone;            // 전화번호
-	private String email;            // 이메일
-	private String other;            // 기타 정보
-	private Integer salary;          // 급여
-	
-	//생성자: 사원 정보를 받아 초기화.
-	public Employee(Integer empNo, String empForm, String name, 
-			Date hiredDate, String dep, String registrationNum,
-			String address, String phone, String email, String other, 
-			Integer salary) {
+	private Integer empNo; // 사원 번호
+	private String empForm; // 고용 형태
+	private String name; // 사원 이름
+	private Date hiredDate; // 채용일
+	private Date retiredDate; // 퇴사일
+	private String dep; // 부서
+	private String registrationNum; // 주민등록번호
+	private String address; // 주소
+	private String phone; // 전화번호
+	private String email; // 이메일
+	private String other; // 기타 정보
+	private Integer salary; // 급여
+
+	// 생성자: 사원 정보를 받아 초기화.
+	public Employee(Integer empNo, String empForm, String name, Date hiredDate, Date retiredDate, String dep,
+			String registrationNum, String address, String phone, String email, String other, Integer salary) {
 		this.empNo = empNo;
 		this.empForm = empForm;
 		this.name = name;
@@ -35,7 +34,7 @@ public class Employee {
 		this.salary = salary;
 	}
 
-	//Getter 메서드 각 필드를 외부에서 읽을 수 있게 제공.
+	// Getter 메서드 각 필드를 외부에서 읽을 수 있게 제공.
 	public Integer getEmpNo() {
 		return empNo;
 	}
@@ -50,6 +49,10 @@ public class Employee {
 
 	public Date getHiredDate() {
 		return hiredDate;
+	}
+
+	public Date getRetireDate() {
+		return retiredDate;
 	}
 
 	public String getDep() {
@@ -82,7 +85,7 @@ public class Employee {
 
 	public void validate(Map<String, Boolean> errors) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
