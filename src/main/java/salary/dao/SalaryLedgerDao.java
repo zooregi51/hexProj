@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import jdbc.JdbcUtil;
+import salary.model.Employee;
 import salary.model.Payment;
 import salary.model.Salary;
 import salary.model.SalaryLedgerMonth;
@@ -43,8 +44,13 @@ public class SalaryLedgerDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("select salary_emp_no, salary_salary, salary_food from salary\r\n"
-					+ "where substr(salary_num, 0, 7) = ?");
+			// join하는 구문으로 수정할 필요 있음
+			// 구분, 성명, 입사일 부서, 직위
+			pstmt = conn.prepareStatement("select b.empform, b.name, b.hireddate, b.dep, a.salary_emp_no, a.salary_salary, a.salary_food \r\n"
+					+ "from salary a,\r\n"
+					+ "employee b\r\n"
+					+ "where substr(a.salary_num, 0, 7) = ?\r\n"
+					+ "and a.salary_emp_no = b.empno;");
 			
 			pstmt.setString(1, yearMonth);
 			rs = pstmt.executeQuery();
@@ -60,6 +66,6 @@ public class SalaryLedgerDao {
 	}
 
 	private Salary convertSalary(ResultSet rs) throws SQLException {
-		return new Salary(rs.getString("salary_num"), null, new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null));
+		return new Salary(rs.getString("salary_num"), new Employee(rs.getInt("salary_emp_no"), rs.getString("name"), rs.getString("empform"), rs.getString("dep"), null, rs.getDate("hireddate")), new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null));
 	}
 }
