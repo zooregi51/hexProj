@@ -132,4 +132,28 @@ public class SalaryDao {
 			JdbcUtil.close(pstmt);
 		}
 	}
+
+	public ArrayList<Salary> getTransfered(Connection conn, String yearmonth) throws SQLException {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		// 해당 월의 인원들 급여 내역 출력
+		try {
+			pstmt = conn.prepareStatement("SELECT b.name, b.dep, a.salary_salary, a.salary_food, a.salary_transfer_date\r\n"
+					+ "FROM salary a,\r\n"
+					+ "employee b\r\n"
+					+ "where a.salary_transfer_date is not null\r\n"
+					+ "and a.salary_emp_no = b.empno\r\n"
+					+ "and substr(a.salary_transfer_date, 1, 5) = ?");
+			pstmt.setString(1, yearmonth);
+			rs = pstmt.executeQuery();
+			ArrayList<Salary> result = new ArrayList<Salary>();
+			while(rs.next()) {
+				result.add(convertSalary(rs));
+			}
+			return result;
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
+	}
 }

@@ -32,4 +32,14 @@ public class SalaryTransferService {
 			throw new RuntimeException(e);
 		}
 	}
+
+
+	public ArrayList<Salary> getTransferedSalary(String yearmonth) {
+		try(Connection conn = ConnectionProvider.getConnection()){
+			ArrayList<Salary> spec = ledD.getTransfered(conn, yearmonth);
+			return spec;
+		}catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
