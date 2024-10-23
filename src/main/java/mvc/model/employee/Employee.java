@@ -9,6 +9,7 @@ public class Employee {
 	private String empForm; // 고용 형태
 	private String name; // 사원 이름
 	private Date hiredDate; // 채용일
+	private Date retiredDate; // 퇴사일
 	private String dep; // 부서
 	private String registrationNum; // 주민등록번호
 	private String address; // 주소
@@ -50,6 +51,11 @@ public class Employee {
 		return hiredDate;
 	}
 
+
+	public Date getRetireDate() {
+		return retiredDate;
+	}
+  
 	public String getDep() {
 		return dep;
 	}
@@ -84,3 +90,4 @@ public class Employee {
 	}
 
 }
+

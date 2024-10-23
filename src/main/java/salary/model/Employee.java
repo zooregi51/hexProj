@@ -9,14 +9,17 @@ public class Employee {
 	private String empDepart;
 	private String empPos;
 	private Date empHiredDate;
+	private Integer salary;
+	
 	public Employee(Integer empId, String empName, String empForm, String empDepart, String empPos,
-			Date empHiredDate) {
+			Date empHiredDate, Integer salary) {
 		this.empId = empId;
 		this.empName = empName;
 		this.empForm = empForm;
 		this.empDepart = empDepart;
 		this.empPos = empPos;
 		this.empHiredDate = empHiredDate;
+		this.salary = salary;
 	}
 	public Integer getEmpId() {
 		return empId;
@@ -35,6 +38,9 @@ public class Employee {
 	}
 	public Date getEmpHiredDate() {
 		return empHiredDate;
+	}
+	public Integer getSalary() {
+		return salary;
 	}
 	
 	
