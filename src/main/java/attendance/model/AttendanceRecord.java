@@ -1,20 +1,21 @@
 package attendance.model;
 
 import java.sql.Date;
+import java.sql.Time;
 
 public class AttendanceRecord {
 
-    private String recordId;        // 기록 ID
-    private String employeeId;      // 사원 ID
-    private Date workDate;          // 근무일자 (DATE 타입)
-    private String startTime;       // 출근 시간 (VARCHAR2)
-    private String endTime;         // 퇴근 시간 (VARCHAR2)
-    private String workType;        // 근무 유형
-    private String approvalStatus;  // 승인 상태 (optional)
-    private int totalOvertimeHours;  // 총 초과 근무시간 (NUMBER)
+    private int recordId;  // 기록 번호
+    private String employeeId;  // 사원 코드
+    private Date workDate;  // 근무 일자
+    private Time startTime;  // 출근 시간
+    private Time endTime;  // 퇴근 시간
+    private String workType;  // 근무 유형
+    private String approvalStatus;  // 승인 상태
+    private int totalOvertimeHours;  // 총 초과 근무 시간
 
-    // 생성자 (모든 필드 포함)
-    public AttendanceRecord(String recordId, String employeeId, Date workDate, String startTime, String endTime, String workType, String approvalStatus, int totalOvertimeHours) {
+    // 전체 필드 초기화 생성자 (수정용)
+    public AttendanceRecord(int recordId, String employeeId, Date workDate, Time startTime, Time endTime, String workType, String approvalStatus, int totalOvertimeHours) {
         this.recordId = recordId;
         this.employeeId = employeeId;
         this.workDate = workDate;
@@ -25,8 +26,8 @@ public class AttendanceRecord {
         this.totalOvertimeHours = totalOvertimeHours;
     }
 
-    // 생성자 (필수 필드만 포함)
-    public AttendanceRecord(String employeeId, Date workDate, String startTime, String endTime, String workType, String approvalStatus, int totalOvertimeHours) {
+    // 추가용 생성자 (recordId 없이)
+    public AttendanceRecord(String employeeId, Date workDate, Time startTime, Time endTime, String workType, String approvalStatus, int totalOvertimeHours) {
         this.employeeId = employeeId;
         this.workDate = workDate;
         this.startTime = startTime;
@@ -37,7 +38,7 @@ public class AttendanceRecord {
     }
 
     // Getter 메서드들
-    public String getRecordId() {
+    public int getRecordId() {
         return recordId;
     }
 
@@ -49,11 +50,11 @@ public class AttendanceRecord {
         return workDate;
     }
 
-    public String getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public String getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 

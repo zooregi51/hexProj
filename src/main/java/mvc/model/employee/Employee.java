@@ -19,8 +19,8 @@ public class Employee {
 	private Integer salary; // 급여
 
 	// 생성자: 사원 정보를 받아 초기화.
-	public Employee(Integer empNo, String empForm, String name, Date hiredDate, Date retiredDate, String dep,
-			String registrationNum, String address, String phone, String email, String other, Integer salary) {
+	public Employee(Integer empNo, String empForm, String name, Date hiredDate, String dep, String registrationNum,
+			String address, String phone, String email, String other, Integer salary) {
 		this.empNo = empNo;
 		this.empForm = empForm;
 		this.name = name;
@@ -51,10 +51,11 @@ public class Employee {
 		return hiredDate;
 	}
 
+
 	public Date getRetireDate() {
 		return retiredDate;
 	}
-
+  
 	public String getDep() {
 		return dep;
 	}
@@ -89,3 +90,4 @@ public class Employee {
 	}
 
 }
+
