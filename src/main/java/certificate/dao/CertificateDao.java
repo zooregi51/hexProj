@@ -33,11 +33,12 @@ public class CertificateDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
-			pstmt = conn.prepareStatement("select * from(select rownum as rnum,a.*from" + " (select * from article order by article_no desc)" + " a where rownum <= ?)where rnum >= ?");
+			pstmt = conn.prepareStatement("select * from(select rownum as rnum,a.*from" + " (select * from certificate order by certificate_Id desc)" + " a where rownum <= ?)where rnum >= ?");
 			pstmt.setInt(1,endRow);
 			pstmt.setInt(2,firstRow);
 			rs=pstmt.executeQuery();
 			List<Certificate> result=new ArrayList<>();
+			//조인해서 불러와야함
 			while(rs.next()) {
 				result.add(convertCertificate(rs));
 			}
@@ -49,5 +50,23 @@ public class CertificateDao {
 	private Certificate convertCertificate(ResultSet rs)throws SQLException{
 		return new Certificate(rs.getInt("certificate_Id"),rs.getString("certificate_Register"),rs.getString("certificate_Purpose"),rs.getInt("employee_Id"),rs.getString("employee_Form"),rs.getString("employee_KrName"),rs.getString("employee_Department"),rs.getString("employee_Position"),rs.getDate("certificate_Date")
 				);
+	}
+	public Certificate selectById(Connection conn,int no)throws SQLException{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			pstmt=conn.prepareStatement("select * from certificate where certificate_Id=?");
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			Certificate certificate=null;
+			if(rs.next()) {
+				certificate=convertCertificate(rs);
+				
+			}
+			return certificate;
+		}finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(pstmt);
+		}
 	}
 }

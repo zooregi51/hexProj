@@ -32,7 +32,12 @@ public class CertificatePage {
 		endPage=startPage+4;
 		if(endPage>totalPages)endPage=totalPages;
 	}
-	
+	public boolean hasNoCertificates() {
+		return total==0;
+	}
+	public boolean hasCertificates() {
+		return total>0;
+	}
 	public int getTotal() {
 		return total;
 	}
