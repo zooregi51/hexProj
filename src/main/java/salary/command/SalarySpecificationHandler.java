@@ -33,7 +33,7 @@ private GetSalarySpecificationService specSer = new GetSalarySpecificationServic
 			if(month == null)
 				month = now.getMonth() + "";
 			ArrayList<SalarySpecification> spec = specSer.getSalarySpecification(year, month);
-			req.setAttribute("specDetail", spec);
+			req.setAttribute("specs", spec);
 			return "/WEB-INF/view/salary/salarySpecification.jsp?year=" + year + "month=" + month;
 		}
 		

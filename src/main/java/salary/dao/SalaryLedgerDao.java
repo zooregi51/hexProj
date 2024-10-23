@@ -17,9 +17,9 @@ public class SalaryLedgerDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select substr(salary_num, 1, 7), count(*), sum(salary_salary), sum(salary_food) from salary \r\n"
-					+ "where substr(salary_num, 1, 4) = ?\r\n"
-					+ "group by substr(salary_num, 1, 7)\r\n"
+			pstmt = conn.prepareStatement("select substr(salary_num, 1, 7), count(*), sum(salary_salary), sum(salary_food) from salary  "
+					+ "where substr(salary_num, 1, 4) = ? "
+					+ "group by substr(salary_num, 1, 7) "
 					+ "order by substr(salary_num, 1, 7)");
 			
 			pstmt.setString(1, year + "");
@@ -46,10 +46,10 @@ public class SalaryLedgerDao {
 		try {
 			// join하는 구문으로 수정할 필요 있음
 			// 구분, 성명, 입사일 부서, 직위
-			pstmt = conn.prepareStatement("select b.empform, b.name, b.hireddate, b.dep, a.salary_emp_no, a.salary_salary, a.salary_food \r\n"
-					+ "from salary a,\r\n"
-					+ "employee b\r\n"
-					+ "where substr(a.salary_num, 0, 7) = ?\r\n"
+			pstmt = conn.prepareStatement("select b.empform, b.name, b.hireddate, b.dep, a.salary_emp_no, a.salary_salary, a.salary_food  "
+					+ "from salary a, "
+					+ "employee b "
+					+ "where substr(a.salary_num, 0, 7) = ? "
 					+ "and a.salary_emp_no = b.empno");
 			
 			pstmt.setString(1, yearMonth);
@@ -66,6 +66,6 @@ public class SalaryLedgerDao {
 	}
 
 	private Salary convertSalary(ResultSet rs) throws SQLException {
-		return new Salary(rs.getString("salary_num"), new Employee(rs.getInt("salary_emp_no"), rs.getString("name"), rs.getString("empform"), rs.getString("dep"), null, rs.getDate("hireddate")), new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null));
+		return new Salary(rs.getString("salary_num"), new Employee(rs.getInt("salary_emp_no"), rs.getString("name"), rs.getString("empform"), rs.getString("dep"), null, rs.getDate("hireddate"), rs.getInt("salary")), new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null));
 	}
 }

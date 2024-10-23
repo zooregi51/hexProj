@@ -33,9 +33,7 @@ public class SalaryTransferHandler implements CommandHandler {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 			return null;
 		}
-		
-		
-		
+			
 	}
 
 }
