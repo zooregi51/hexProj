@@ -27,7 +27,7 @@ public class SalaryTransferHandler implements CommandHandler {
 		}else if(req.getMethod().equalsIgnoreCase("POST")) {
 			int check = transferSer.transferSal();
 			if(check == 1)
-				return "/WEB-INF/view/salary/salaryTransfer.jsp";
+				return "/WEB-INF/view/salary/salaryTransferSuccess.jsp";
 			return "/WEB-INF/view/salary/salaryTransferFailed.jsp";
 		}else {
 			res.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
