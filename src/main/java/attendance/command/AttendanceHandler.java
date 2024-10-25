@@ -28,7 +28,7 @@ public class AttendanceHandler implements CommandHandler {
         } else if ("delete".equals(action)) {
             return processDelete(req, res); // 근태 기록 삭제 처리
         } else {
-            return "/WEB-INF/view/attendanceList.jsp"; // 기본 리스트 페이지로 이동
+            return "/attendanceList.jsp"; // 기본 리스트 페이지로 이동
         }
     }
 
@@ -36,7 +36,7 @@ public class AttendanceHandler implements CommandHandler {
     private String processList(HttpServletRequest req, HttpServletResponse res) throws Exception {
         List<AttendanceRecord> attendanceList = attendanceService.getAttendanceList();
         req.setAttribute("attendanceList", attendanceList); // 리스트를 request에 저장
-        return "/WEB-INF/view/attendanceList.jsp"; // JSP로 포워딩
+        return "/attendanceList.jsp"; // JSP로 포워딩
     }
 
     // 근태 기록 추가를 처리하는 메서드
