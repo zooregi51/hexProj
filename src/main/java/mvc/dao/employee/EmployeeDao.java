@@ -20,7 +20,7 @@ public class EmployeeDao {
 					+ "VALUES (emp_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 
-			// 각 필드에 맞게 Employee 객체에서 데이터를 추출하여 PreparedStatement에 세팅.
+			// 각 필드에 맞게 Employee 객체에서 데이터를 추출하여 PreparedStatement에 세팅
 			pstmt.setString(1, emp.getEmpForm());
 			pstmt.setString(2, emp.getName());
 			pstmt.setTimestamp(3, toTimestamp(emp.getHiredDate())); // Date를 Timestamp로 변환 후 삽입
