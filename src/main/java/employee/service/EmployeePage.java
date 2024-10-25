@@ -34,12 +34,13 @@ public class EmployeePage {
 		if(endPage>totalPages)endPage=totalPages;
 	}
 	
-	public boolean hasNoEmployee() {
+	public boolean hasNoEmployees() {
 		return total==0;
 	}
-	public boolean hasEmployee() {
+	public boolean hasEmployees() {
 		return total>0;
 	}
+
 	public int getTotal() {
 		return total;
 	}

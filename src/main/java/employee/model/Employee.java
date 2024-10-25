@@ -3,101 +3,76 @@ import java.util.Date;
 
 public class Employee {
 
-	private Integer employee_Id;
-	private String employee_Form;
-	private String employee_KrName;
-	private String employee_EnName;
-	private Date employee_Date;
-	private Date employee_ResignDate;
-	private String employee_Department;
-	private String employee_Position;
-	private Date employee_ResidentNumber;
-	private String employee_Address;
-	private Integer employee_HomeNumber;
-	private Integer employee_MobileNumber;
-	private String employee_Email;
-	private String employee_Sns;
-	private String employee_Ex;
+	private Integer empno;
+	private String empform;
+	private String name;
+	private Date hireddate;
+	private Date retireddate;
+	private String dep;
+	private String position;
+	private String registrationnum;
+	private String address;
+	private String phone;
+	private String email;
+	private String other;
+	private Integer salary;
 	
-	public Employee(Integer employee_Id, String employee_Form, String employee_KrName, String employee_EnName,
-			Date employee_Date, Date employee_ResignDate, String employee_Department, String employee_Position,
-			Date employee_ResidentNumber, String employee_Address, Integer employee_HomeNumber,
-			Integer employee_MobileNumber, String employee_Email, String employee_Sns, String employee_Ex) {
-
-		this.employee_Id = employee_Id;
-		this.employee_Form = employee_Form;
-		this.employee_KrName = employee_KrName;
-		this.employee_EnName = employee_EnName;
-		this.employee_Date = employee_Date;
-		this.employee_ResignDate = employee_ResignDate;
-		this.employee_Department = employee_Department;
-		this.employee_Position = employee_Position;
-		this.employee_ResidentNumber = employee_ResidentNumber;
-		this.employee_Address = employee_Address;
-		this.employee_HomeNumber = employee_HomeNumber;
-		this.employee_MobileNumber = employee_MobileNumber;
-		this.employee_Email = employee_Email;
-		this.employee_Sns = employee_Sns;
-		this.employee_Ex = employee_Ex;
+	public Employee(Integer empno, String empform, String name, Date hireddate, Date retireddate, String dep,
+			String position, String registrationnum, String address, String phone, String email, String other,
+			Integer salary) {
+		this.empno = empno;
+		this.empform = empform;
+		this.name = name;
+		this.hireddate = hireddate;
+		this.retireddate = retireddate;
+		this.dep = dep;
+		this.position = position;
+		this.registrationnum = registrationnum;
+		this.address = address;
+		this.phone = phone;
+		this.email = email;
+		this.other = other;
+		this.salary = salary;
 	}
-
-	public Integer getEmployee_Id() {
-		return employee_Id;
+	public Integer getEmpno() {
+		return empno;
 	}
-
-	public String getEmployee_Form() {
-		return employee_Form;
+	public String getEmpform() {
+		return empform;
 	}
-
-	public String getEmployee_KrName() {
-		return employee_KrName;
+	public String getName() {
+		return name;
 	}
-
-	public String getEmployee_EnName() {
-		return employee_EnName;
+	public Date getHireddate() {
+		return hireddate;
 	}
-
-	public Date getEmployee_Date() {
-		return employee_Date;
+	public Date getRetireddate() {
+		return retireddate;
 	}
-
-	public Date getEmployee_ResignDate() {
-		return employee_ResignDate;
+	public String getDep() {
+		return dep;
 	}
-
-	public String getEmployee_Department() {
-		return employee_Department;
+	public String getPosition() {
+		return position;
 	}
-
-	public String getEmployee_Position() {
-		return employee_Position;
+	public String getRegistrationnum() {
+		return registrationnum;
 	}
-
-	public Date getEmployee_ResidentNumber() {
-		return employee_ResidentNumber;
+	public String getAddress() {
+		return address;
 	}
-
-	public String getEmployee_Address() {
-		return employee_Address;
+	public String getPhone() {
+		return phone;
 	}
-
-	public Integer getEmployee_HomeNumber() {
-		return employee_HomeNumber;
+	public String getEmail() {
+		return email;
 	}
-
-	public Integer getEmployee_MobileNumber() {
-		return employee_MobileNumber;
+	public String getOther() {
+		return other;
 	}
-
-	public String getEmployee_Email() {
-		return employee_Email;
+	public Integer getSalary() {
+		return salary;
 	}
-
-	public String getEmployee_Sns() {
-		return employee_Sns;
-	}
-
-	public String getEmployee_Ex() {
-		return employee_Ex;
-	}
+	
+	
 }
