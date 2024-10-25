@@ -20,7 +20,7 @@
 		<td>직위</td>
 		<td>발급일</td>
 	</tr>
-<c:if test="${certificatePage.hasCertificates() }">
+<c:if test="${certificatePage.hasNoCertificates() }">
 	<tr>
 		<td colspan="4">제 증명서 발급대장이 없습니다.</td>
 	</tr>
@@ -30,10 +30,10 @@
 		<td>${certificate.certificate_Id }</td>
 		<td>${certificate.certificate_Register }</td>
 		<td>${certificate.certificate_Purpose }</td>
-		<td>${certificate.employee_Form }</td>
-		<td>${certificate.employee_KrName }</td>
-		<td>${certificate.employee_Department }</td>
-		<td>${certificate.employee_Position }</td>
+		<td>${certificate.empform }</td>
+		<td>${certificate.name }</td>
+		<td>${certificate.dep }</td>
+		<td>${certificate.position }</td>
 		<td>${certificate.certificate_Date }</td>
 	</tr>
 </c:forEach>

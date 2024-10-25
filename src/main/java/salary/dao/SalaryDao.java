@@ -17,7 +17,23 @@ import salary.model.SalarySpecification;
 
 public class SalaryDao {
 	private Salary convertSalary(ResultSet rs) throws SQLException{		
-		return new Salary(rs.getString("salary_num"), new Employee(null, rs.getString("name"), null, rs.getString("dep"), null, null, rs.getInt("salary")), new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null));
+		return new Salary(rs.getString("salary_num"),
+				new Employee(null, 
+						rs.getString("name"), 
+						null, 
+						rs.getString("dep"), 
+						null, 
+						null, 
+						rs.getInt("salary_salary")), 
+				new Payment(rs.getInt("salary_salary"), 
+						rs.getInt("salary_food"), 
+						null, 
+						null, 
+						null, 
+						null, 
+						null, 
+						null),
+				rs.getString("salary_transfer_date"));
 	}
 
 	public ArrayList<SalarySpecification> getSpecification(Connection conn, String year, String month) throws SQLException {
@@ -54,7 +70,7 @@ public class SalaryDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("SELECT b.name, b.dep, a.salary_salary, a.salary_food "
+			pstmt = conn.prepareStatement("SELECT a.salary_num, b.name, b.dep, a.salary_salary, a.salary_food, a.salary_transfer_date "
 					+ "FROM salary a, "
 					+ "employee b "
 					+ "where salary_transfer_date is null "
@@ -79,25 +95,26 @@ public class SalaryDao {
 			pstmt = conn.prepareStatement("update salary "
 					+ "    set salary_transfer_date = sysdate "
 					+ "    where salary_transfer_date is null");
-			
 			return pstmt.executeUpdate();
 		}finally {
 			JdbcUtil.close(pstmt);
 		}
 	}
 
-	public ArrayList<Salary> getTransfered(Connection conn, String yearmonth) throws SQLException {
+	public ArrayList<Salary> getTransfered(Connection conn, String startDate, String endDate) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("SELECT b.name, b.dep, a.salary_salary, a.salary_food, a.salary_transfer_date "
+			pstmt = conn.prepareStatement("SELECT a.salary_num, b.name, b.dep, a.salary_salary, a.salary_food, a.salary_transfer_date "
 					+ "FROM salary a, "
 					+ "employee b "
 					+ "where a.salary_transfer_date is not null "
 					+ "and a.salary_emp_no = b.empno "
-					+ "and substr(a.salary_transfer_date, 1, 5) = ?");
-			pstmt.setString(1, yearmonth);
+					+ "and a.salary_transfer_date >= ? "
+					+ "and a.salary_transfer_date <= ?");
+			pstmt.setString(1, startDate);
+			pstmt.setString(2, endDate);
 			rs = pstmt.executeQuery();
 			ArrayList<Salary> result = new ArrayList<Salary>();
 			while(rs.next()) {
