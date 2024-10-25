@@ -8,8 +8,10 @@
     <title>사원 리스트</title>
 </head>
 <body>
+
 <h2>사원 리스트</h2>
 
+<!-- 직원 목록을 출력하는 테이블 -->
 <table border="1">
     <tr>
         <th>사원번호</th>
@@ -17,9 +19,9 @@
         <th>이름</th>
         <th>부서</th>
         <th>직위</th>
-        <th>근태 기록</th>
     </tr>
 
+    <!-- employeeList 반복 출력 -->
     <c:forEach var="employee" items="${employeeList}">
         <tr>
             <td>${employee.empNo}</td>
@@ -27,9 +29,9 @@
             <td>${employee.name}</td>
             <td>${employee.dep}</td>
             <td>${employee.position}</td>
-            <td><a href="attendance.do?action=manage&empNo=${employee.empNo}">관리</a></td>
         </tr>
     </c:forEach>
 </table>
+
 </body>
 </html>
