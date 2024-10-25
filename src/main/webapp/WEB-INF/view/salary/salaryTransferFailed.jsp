@@ -8,10 +8,9 @@
 </head>
 <body>
 
-게시글을 수정했습니다.
+이체에 실패했습니다.
 <br>
 ${ctxPath = pageContext.request.contextPath ; ''}
-<a href="${ctxPath}/article/list.do">[게시글목록보기]</a>
-<a href="${ctxPath}/article/read.do?no=${modReq.articleNumber}">[게시글내용보기]</a>
+<a href="${ctxPath}/salary/salaryTransfer.do">[이체 화면으로 이동]</a>
 </body>
 </html>

@@ -27,6 +27,7 @@ public class SalaryTransferService {
 	public int transferSal() {
 		try(Connection conn = ConnectionProvider.getConnection()){
 			int spec = ledD.setTransferDate(conn);
+			System.out.println(spec);
 			return spec;
 		}catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -34,9 +35,9 @@ public class SalaryTransferService {
 	}
 
 
-	public ArrayList<Salary> getTransferedSalary(String yearmonth) {
+	public ArrayList<Salary> getTransferedSalary(String startDate, String endDate) {
 		try(Connection conn = ConnectionProvider.getConnection()){
-			ArrayList<Salary> spec = ledD.getTransfered(conn, yearmonth);
+			ArrayList<Salary> spec = ledD.getTransfered(conn, startDate, endDate);
 			return spec;
 		}catch (SQLException e) {
 			throw new RuntimeException(e);
