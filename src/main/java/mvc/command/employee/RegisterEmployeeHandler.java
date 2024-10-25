@@ -29,7 +29,7 @@ public class RegisterEmployeeHandler implements CommandHandler {
 
 	// 등록 폼을 처리하는 메서드 (GET 요청 처리)
 	private String processForm(HttpServletRequest req, HttpServletResponse res) {
-		int nextEmpNo = employeeService.getNextEmpNo(); // 다음 사원 번호 조회
+		int nextEmpNo = employeeService.getNextEmpNo(); // 다음 사원 번호 조회.
 		req.setAttribute("nextEmpNo", nextEmpNo); // JSP로 전달
 		return FORM_VIEW; // 폼 페이지로 이동
 	}

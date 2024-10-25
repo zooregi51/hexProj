@@ -15,7 +15,7 @@ public class RegisterEmployeeService {
         try (Connection conn = ConnectionProvider.getConnection()) {
             conn.setAutoCommit(false);  // 트랜잭션 시작
 
-            int savedEmployee = employeeDao.insert(conn, emp); // 사원 정보 저장
+            int savedEmployee = employeeDao.insert(conn, emp); // 사원 정보 저장.
             if (savedEmployee == 0) {
                 throw new RuntimeException("fail to insert employee");
             }
