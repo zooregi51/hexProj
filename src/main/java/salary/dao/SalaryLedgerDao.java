@@ -66,6 +66,7 @@ public class SalaryLedgerDao {
 	}
 
 	private Salary convertSalary(ResultSet rs) throws SQLException {
-		return new Salary(rs.getString("salary_num"), new Employee(rs.getInt("salary_emp_no"), rs.getString("name"), rs.getString("empform"), rs.getString("dep"), null, rs.getDate("hireddate"), rs.getInt("salary")), new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null));
+		return new Salary(rs.getString("salary_num"), new Employee(rs.getInt("salary_emp_no"), rs.getString("name"), rs.getString("empform"), rs.getString("dep"), null, rs.getDate("hireddate"), rs.getInt("salary")), new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null)
+				, null);
 	}
 }
