@@ -1,34 +1,40 @@
 package attendance.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
 import attendance.model.Employee;
+import jdbc.JdbcUtil;
 
 public class EmployeeDao {
 
-    // 직원 목록을 가져오는 메서드
+    // 사원 전체 리스트를 조회하는 메서드
     public List<Employee> selectAll(Connection conn) throws SQLException {
-        String sql = "SELECT empno, empform, name, dep, position FROM Employee"; // SQL 쿼리 작성
+        List<Employee> employeeList = new ArrayList<>();
+        String sql = "SELECT empno, empform, name, dep, position FROM Employee";
+        
         try (PreparedStatement pstmt = conn.prepareStatement(sql);
              ResultSet rs = pstmt.executeQuery()) {
-            
-            List<Employee> list = new ArrayList<>();
             while (rs.next()) {
-                // ResultSet에서 데이터를 읽어 Employee 객체로 변환
                 Employee employee = new Employee(
-                    rs.getInt("empno"), 
-                    rs.getString("empform"), 
-                    rs.getString("name"), 
+                    rs.getInt("empno"),
+                    rs.getString("empform"),
+                    rs.getString("name"),
+                    null, // hireddate는 필요 없으므로 null로 설정
+                    null, // retireddate는 필요 없으므로 null로 설정
                     rs.getString("dep"),
-                    rs.getString("position")
+                    rs.getString("position"),
+                    null, // registrationnum은 필요 없으므로 null로 설정
+                    null, // address는 필요 없으므로 null로 설정
+                    null, // phone은 필요 없으므로 null로 설정
+                    null, // email은 필요 없으므로 null로 설정
+                    null, // other는 필요 없으므로 null로 설정
+                    0 // salary는 필요 없으므로 0으로 설정
                 );
-                list.add(employee); // 리스트에 추가
+                employeeList.add(employee);
             }
-            return list; // 결과 리스트 반환
         }
+        return employeeList;
     }
 }

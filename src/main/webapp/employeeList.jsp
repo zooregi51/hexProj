@@ -1,37 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-<!DOCTYPE html>
+<%@ page contentType="text/html; charset=utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>사원 리스트</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
-
-<h2>사원 리스트</h2>
-
-<!-- 직원 목록을 출력하는 테이블 -->
-<table border="1">
-    <tr>
-        <th>사원번호</th>
-        <th>고용 형태</th>
-        <th>이름</th>
-        <th>부서</th>
-        <th>직위</th>
-    </tr>
-
-    <!-- employeeList 반복 출력 -->
-    <c:forEach var="employee" items="${employeeList}">
-        <tr>
-            <td>${employee.empNo}</td>
-            <td>${employee.empForm}</td>
-            <td>${employee.name}</td>
-            <td>${employee.dep}</td>
-            <td>${employee.position}</td>
-        </tr>
-    </c:forEach>
-</table>
-
+    <h2>사원 리스트</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>구분</th>
+                <th>사원번호</th>
+                <th>성명</th>
+                <th>부서</th>
+                <th>직위</th>
+                <th>근태기록</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach var="employee" items="${employeeList}">
+                <tr>
+                    <td>${employee.empform}</td>
+                    <td>No-${employee.empno}</td>
+                    <td>${employee.name}</td>
+                    <td>${employee.dep}</td>
+                    <td>${employee.position}</td>
+                    <td><a href="/attendance/record.do?empno=${employee.empno}">관리</a></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </body>
 </html>
