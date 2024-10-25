@@ -36,7 +36,7 @@ public class EmployeeDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
-			pstmt = conn.prepareStatement("select * from(select rownum as rnum,a.*from" + " (select * from article order by article_no desc)" + " a where rownum <= ?)where rnum >= ?");
+			pstmt = conn.prepareStatement("select * from(select rownum as rnum,a.*from" + " (select * from employee order by empno desc)" + " a where rownum <= ?)where rnum >= ?");
 			pstmt.setInt(1,endRow);
 			pstmt.setInt(2,firstRow);
 			rs=pstmt.executeQuery();
@@ -50,19 +50,19 @@ public class EmployeeDao {
 		}
 	}
 	private Employee convertEmployee(ResultSet rs)throws SQLException{
-		return new Employee(rs.getInt("employee_Id"),rs.getString("employee_Form"),rs.getString("employee_KrName"),rs.getString("employee_EnName"),rs.getDate("employee_Date"),rs.getDate("employee_ResignDate"),rs.getString("employee_Department"),rs.getString("employee_Position"),rs.getDate("employee_ResidentNumber"),rs.getString("employee_Address"),rs.getInt("employee_HomeNumber"),rs.getInt("employee_MobileNumber"),rs.getString("employee_Email"),rs.getString("employee_Sns"),rs.getString("employee_Ex"
-				));
+		return new Employee(rs.getInt("empno"),rs.getString("empform"),rs.getString("name"),rs.getDate("hireddate"),rs.getDate("retireddate"),rs.getString("dep"),rs.getString("position"),rs.getString("registrationnum"),rs.getString("address"),rs.getString("phone"),rs.getString("email"),rs.getString("other"),rs.getInt("salary")
+				);
 	}
 	public Employee selectById(Connection conn,int no)throws SQLException{
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		try {
-			pstmt=conn.prepareStatement("select * from employee where employee_Id=?");
+			pstmt=conn.prepareStatement("select * from employee where empno=?");
 			pstmt.setInt(1, no);
 			rs=pstmt.executeQuery();
 			Employee employee=null;
 			if(rs.next()) {
-				employee = new Employee(rs.getInt("employee_Id"),rs.getString("employee_Form"),rs.getString("employee_KrName"),rs.getString("employee_EnName"),rs.getDate("employee_Date"),rs.getDate("employee_ResignDate"),rs.getString("employee_Department"),rs.getString("employee_Position"),rs.getDate("employee_ResidentNumber"),rs.getString("employee_Address"),rs.getInt("employee_HomeNumber"),rs.getInt("employee_MobileNumber"),rs.getString("employee_Email"),rs.getString("employee_Sns"),rs.getString("employee_Ex"));
+				employee = convertEmployee(rs);
 			}
 			return employee;
 		} finally {
