@@ -20,7 +20,7 @@ public class RegisterEmployeeService {
                 throw new RuntimeException("fail to insert employee");
             }
 
-            conn.commit();  // 성공 시 트랜잭션 커밋
+            conn.commit();  // 성공 시 트랜잭션 커밋.....
             return savedEmployee;
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -61,7 +61,7 @@ public class RegisterEmployeeHandler implements CommandHandler {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		 // salary 값을 빈 문자열일 경우 null로 처리
 		try {
 			String salaryStr = req.getParameter("salary");
 			if (salaryStr != null && !salaryStr.trim().isEmpty()) {

@@ -16,8 +16,8 @@ public class EmployeeDao {
 		PreparedStatement pstmt = null;
 		try {
 			// employee 테이블에 데이터를 삽입하는 쿼리 작성 (emp_seq.NEXTVAL 시퀀스 사용)
-			String sql = "INSERT INTO Employee (empno, empform, name, hireddate, dep, registrationnum, address, phone, email, other, salary) "
-					+ "VALUES (emp_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO Employee (empno, empform, name, hireddate, dep, position, registrationnum, address, phone, email, other, salary) "
+					+ "VALUES (emp_seq.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 
 			// 각 필드에 맞게 Employee 객체에서 데이터를 추출하여 PreparedStatement에 세팅
@@ -25,16 +25,17 @@ public class EmployeeDao {
 			pstmt.setString(2, emp.getName());
 			pstmt.setTimestamp(3, toTimestamp(emp.getHiredDate())); // Date를 Timestamp로 변환 후 삽입
 			pstmt.setString(4, emp.getDep());
-			pstmt.setString(5, emp.getRegistrationNum());
-			pstmt.setString(6, emp.getAddress());
-			pstmt.setString(7, emp.getPhone());
-			pstmt.setString(8, emp.getEmail());
-			pstmt.setString(9, emp.getOther());
+			pstmt.setString(5, emp.getPosition());
+			pstmt.setString(6, emp.getRegistrationNum());
+			pstmt.setString(7, emp.getAddress());
+			pstmt.setString(8, emp.getPhone());
+			pstmt.setString(9, emp.getEmail());
+			pstmt.setString(10, emp.getOther());
 
 			if (emp.getSalary() != null) {
-				pstmt.setInt(10, emp.getSalary());
+				pstmt.setInt(11, emp.getSalary());
 			} else {
-				pstmt.setNull(10, java.sql.Types.INTEGER);
+				pstmt.setNull(11, java.sql.Types.INTEGER);
 			}
 
 			return pstmt.executeUpdate(); // 쿼리 실행 후 삽입된 행 수 반환
