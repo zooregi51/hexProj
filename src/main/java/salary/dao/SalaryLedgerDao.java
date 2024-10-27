@@ -13,16 +13,20 @@ import salary.model.Salary;
 import salary.model.SalaryLedgerMonth;
 
 public class SalaryLedgerDao {
-	public ArrayList<SalaryLedgerMonth> selectLedgerMonth(Connection conn, int year)throws SQLException{
+	public ArrayList<SalaryLedgerMonth> selectLedgerMonth(Connection conn, String year)throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			pstmt = conn.prepareStatement("select substr(salary_num, 1, 7), count(*), sum(salary_salary), sum(salary_food) from salary  "
+			pstmt = conn.prepareStatement("select substr(salary_num, 1, 7) as yearmonth, count(*) as empcnt, max(salary_transfer_date) as transfer_date, "
+					+ "sum(salary_salary) as salary, sum(salary_food) as food, "
+					+ "sum(salary_childcare) as childcare, sum(salary_position_allowance) as position_allowance, sum(salary_continuos_service) as continuos_service"
+					+ ", sum(salary_nightduty) as nightduty, "
+					+ "sum(salary_bonus) as bonus, sum(salary_holiday) as holiday from salary  "
 					+ "where substr(salary_num, 1, 4) = ? "
 					+ "group by substr(salary_num, 1, 7) "
 					+ "order by substr(salary_num, 1, 7)");
 			
-			pstmt.setString(1, year + "");
+			pstmt.setString(1, year);
 			rs = pstmt.executeQuery();
 			ArrayList<SalaryLedgerMonth> result = new ArrayList<SalaryLedgerMonth>();
 			while(rs.next()) {
@@ -36,7 +40,12 @@ public class SalaryLedgerDao {
 	}
 	
 	private SalaryLedgerMonth convertLedgerMonth(ResultSet rs) throws SQLException {
-		return new SalaryLedgerMonth(rs.getString("substr(salary_num, 0, 7)"), rs.getString("substr(salary_num, 0, 7)"), rs.getString("substr(salary_num, 0, 7)") + "-05", rs.getInt("count(*)"), rs.getInt("sum(salary_salary)") + rs.getInt("sum(salary_food)"));
+		return new SalaryLedgerMonth(rs.getString("yearmonth"), rs.getString("yearmonth"), 
+				rs.getDate("transfer_date"), rs.getInt("empcnt"), 
+				rs.getInt("salary") + rs.getInt("food") + rs.getInt("childcare") + 
+				rs.getInt("position_allowance") + rs.getInt("continuos_service") 
+				+ rs.getInt("nightduty") + rs.getInt("bonus") + 
+				rs.getInt("holiday"));
 	}
 
 	public ArrayList<Salary> selectLedgerDetail(Connection conn, String yearMonth)throws SQLException{
@@ -46,7 +55,10 @@ public class SalaryLedgerDao {
 		try {
 			// join하는 구문으로 수정할 필요 있음
 			// 구분, 성명, 입사일 부서, 직위
-			pstmt = conn.prepareStatement("select b.empform, b.name, b.hireddate, b.dep, a.salary_emp_no, a.salary_salary, a.salary_food  "
+			pstmt = conn.prepareStatement("select a.salary_num as salary_num, b.empform as empform, b.name as name, b.hireddate as hireddate, b.dep as dep, "
+					+ "a.salary_emp_no as emp_no, a.salary_salary as salary, a.salary_food as food, "
+					+ "a.SALARY_CHILDCARE as childcare, a.SALARY_POSITION_ALLOWANCE as position_allowance, a.SALARY_CONTINUOS_SERVICE as continuos_service, "
+					+ "a.SALARY_NIGHTDUTY as nightduty, a.SALARY_BONUS as bonus, a.SALARY_HOLIDAY as holiday "
 					+ "from salary a, "
 					+ "employee b "
 					+ "where substr(a.salary_num, 0, 7) = ? "
@@ -66,7 +78,12 @@ public class SalaryLedgerDao {
 	}
 
 	private Salary convertSalary(ResultSet rs) throws SQLException {
-		return new Salary(rs.getString("salary_num"), new Employee(rs.getInt("salary_emp_no"), rs.getString("name"), rs.getString("empform"), rs.getString("dep"), null, rs.getDate("hireddate"), rs.getInt("salary")), new Payment(rs.getInt("salary_salary"), rs.getInt("salary_food"), null, null, null, null, null, null)
+		return new Salary(rs.getString("salary_num"), new Employee(rs.getInt("emp_no"), 
+				rs.getString("name"), rs.getString("empform"), rs.getString("dep"), null, rs.getDate("hireddate"), 
+				rs.getInt("salary")), 
+				new Payment(rs.getInt("salary"), rs.getInt("food"), rs.getInt("childcare"), 
+						rs.getInt("position_allowance"), rs.getInt("continuos_service"), 
+						rs.getInt("nightduty"), rs.getInt("bonus"), rs.getInt("holiday"))
 				, null);
 	}
 }
