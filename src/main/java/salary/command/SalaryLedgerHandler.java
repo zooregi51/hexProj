@@ -19,7 +19,7 @@ public class SalaryLedgerHandler implements CommandHandler {
 	@Override
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		String year = req.getParameter("year");
-		String term = req.getParameter("month");
+		String term = req.getParameter("term");
 		
 		if(term != null) {
 			// 해당 기간의 상세 급여대장 출력
