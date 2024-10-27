@@ -93,8 +93,5 @@ local.properties
 hs_err_pid*
 replay_pid*
 
-<<<<<<< HEAD
+
 # End of https://www.toptal.com/developers/gitignore/api/java,eclipse
-=======
-# End of https://www.toptal.com/developers/gitignore/api/java,eclipse
->>>>>>> e565b93e223f97449b6add5849c49938a45900a0

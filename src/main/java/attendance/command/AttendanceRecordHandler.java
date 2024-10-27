@@ -1,5 +1,6 @@
 package attendance.command;
 
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,6 +9,13 @@ import javax.servlet.http.HttpServletResponse;
 import attendance.model.AttendanceRecord;
 import attendance.service.AttendanceService;
 import mvc.command.CommandHandler;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import attendance.model.AttendanceRecord;
+import attendance.service.AttendanceService;
+import mvc.command.CommandHandler;
+import java.util.List;
+
 
 public class AttendanceRecordHandler implements CommandHandler {
 
