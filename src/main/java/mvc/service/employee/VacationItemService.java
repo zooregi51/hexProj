@@ -11,7 +11,7 @@ import mvc.model.employee.VacationItem;
 public class VacationItemService {
 	private VacationItemDao vacationItemDao = new VacationItemDao();
 
-	// 새로운 휴가 항목을 추가하는 메서드 (VacationItem 객체를 인수로 받음)
+	// 새로운 휴가 항목을 추가하는 메서드.
 	public void addVacationItem(VacationItem item) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			vacationItemDao.insertVacationItem(conn, item);
@@ -20,7 +20,7 @@ public class VacationItemService {
 		}
 	}
 
-	// 모든 휴가 항목을 조회하는 메서드
+	// 모든 휴가 항목을 조회하는 메서드.
 	public List<VacationItem> getVacationItems() {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			return vacationItemDao.getAllVacationItems(conn);
@@ -29,7 +29,7 @@ public class VacationItemService {
 		}
 	}
 
-	// 특정 ID의 휴가 항목을 조회하는 메서드
+	// 특정 ID의 휴가 항목을 조회하는 메서드.
 	public VacationItem getVacationItemById(int id) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			return vacationItemDao.selectById(conn, id);
@@ -38,7 +38,7 @@ public class VacationItemService {
 		}
 	}
 
-	// 휴가 항목 업데이트
+	// 휴가 항목 업데이트.
 	public void updateVacationItem(VacationItem item) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			vacationItemDao.update(conn, item);
@@ -47,7 +47,7 @@ public class VacationItemService {
 		}
 	}
 
-	// 휴가 항목 삭제
+	// 휴가 항목 삭제.
 	public void deleteVacationItem(int id) {
 		try (Connection conn = ConnectionProvider.getConnection()) {
 			vacationItemDao.delete(conn, id);
