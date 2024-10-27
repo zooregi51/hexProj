@@ -39,7 +39,8 @@
                     <td>${employee.name}</td>
                     <td>${employee.dep}</td>
                     <td>${employee.position}</td>
-                    <td><a href="/attendance/record.do?empno=${employee.empno}">관리</a></td>
+                    <!-- 근태 기록 관리 링크 추가 -->
+        			<td><a href="/attendance/attendanceRecordList.do?empno=${employee.empno}">근태 기록 관리</a></td>
                 </tr>
             </c:forEach>
         </tbody>

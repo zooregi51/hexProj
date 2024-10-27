@@ -3,42 +3,40 @@ package attendance.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
-import attendance.dao.AttendanceDao;
+import attendance.dao.AttendanceRecordDao;
 import attendance.model.AttendanceRecord;
 import jdbc.connection.ConnectionProvider;
 
-public class AttendanceService {
+public class AttendanceRecordService {
+    private AttendanceRecordDao recordDao = new AttendanceRecordDao();
 
-    private AttendanceDao attendanceDao = new AttendanceDao();
-
-    public List<AttendanceRecord> getAttendanceList() {
+    public List<AttendanceRecord> getAttendanceListByEmployeeId(String employeeId) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            return attendanceDao.selectAll(conn);
+            return recordDao.selectByEmployeeId(conn, employeeId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void addAttendance(AttendanceRecord attendanceRecord) {
+    public void addAttendanceRecord(AttendanceRecord record) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            attendanceDao.insert(conn, attendanceRecord);
+            recordDao.insert(conn, record);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void updateAttendance(AttendanceRecord attendanceRecord) {
+    public void updateAttendanceRecord(AttendanceRecord record) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            attendanceDao.update(conn, attendanceRecord);
+            recordDao.update(conn, record);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void deleteAttendance(int recordId) {
+    public void deleteAttendanceRecord(int recordId) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            attendanceDao.delete(conn, recordId);
+            recordDao.delete(conn, recordId);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
