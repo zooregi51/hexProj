@@ -1,49 +1,50 @@
 package attendance.service;
 
-import attendance.dao.AttendanceDao;
-import attendance.model.AttendanceRecord;
-import jdbc.connection.ConnectionProvider;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
+import attendance.dao.AttendanceDao;
+import attendance.model.AttendanceRecord;
+import jdbc.connection.ConnectionProvider;
+
 public class AttendanceService {
 
-    private AttendanceDao attendanceDao = new AttendanceDao();  // DAO 인스턴스 생성
+    private AttendanceDao attendanceDao = new AttendanceDao();
 
-    // 전체 근태 기록 조회
-    public List<AttendanceRecord> getAttendanceRecords() throws SQLException {
+    // 전체 근태 기록을 가져오는 메서드
+    public List<AttendanceRecord> getAttendanceList() {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            return attendanceDao.selectAll(conn);  // DAO를 통해 데이터 조회
+            return attendanceDao.selectAll(conn); // DAO 호출
+        } catch (SQLException e) {
+            throw new RuntimeException(e); // 예외 처리
         }
     }
 
-    // 근태 기록 추가
-    public void addAttendance(AttendanceRecord record) throws SQLException {
+    // 새로운 근태 기록을 추가하는 메서드
+    public void addAttendance(AttendanceRecord attendanceRecord) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            attendanceDao.insert(conn, record);  // DAO를 통해 데이터 삽입
+            attendanceDao.insert(conn, attendanceRecord); // DAO 호출
+        } catch (SQLException e) {
+            throw new RuntimeException(e); // 예외 처리
         }
     }
 
-    // 근태 기록 수정
-    public void updateAttendance(String recordId, AttendanceRecord updatedRecord) throws SQLException {
+    // 기존 근태 기록을 수정하는 메서드
+    public void updateAttendance(AttendanceRecord attendanceRecord) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            attendanceDao.update(conn, recordId, updatedRecord);  // 수정 DAO 호출
+            attendanceDao.update(conn, attendanceRecord); // DAO 호출
+        } catch (SQLException e) {
+            throw new RuntimeException(e); // 예외 처리
         }
     }
 
-    // 특정 근태 기록 조회 (ID로)
-    public AttendanceRecord getAttendanceById(String recordId) throws SQLException {
+    // 근태 기록을 삭제하는 메서드
+    public void deleteAttendance(int recordId) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            return attendanceDao.selectById(conn, recordId);  // DAO를 통해 특정 ID 데이터 조회
-        }
-    }
-
-    // 근태 기록 삭제
-    public void deleteAttendance(String recordId) throws SQLException {
-        try (Connection conn = ConnectionProvider.getConnection()) {
-            attendanceDao.delete(conn, recordId);  // 삭제 DAO 호출
+            attendanceDao.delete(conn, recordId); // DAO 호출
+        } catch (SQLException e) {
+            throw new RuntimeException(e); // 예외 처리
         }
     }
 }
