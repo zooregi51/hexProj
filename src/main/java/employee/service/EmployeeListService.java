@@ -18,12 +18,13 @@ public class EmployeeListService {
 		List<Employee> employee=null;
 		try (Connection conn = ConnectionProvider.getConnection()){
 			int total=employeeDao.selectCount(conn);
+			int hiredNum=employeeDao.selectCountHired(conn);
 			if(total>0) {
 				firstRow=(pageNum-1)*size+1;
 				endRow=firstRow+size-1;
 				employee=employeeDao.select(conn, firstRow, endRow);
 			}
-			return new EmployeePage(total,pageNum,size,employee);
+			return new EmployeePage(total,pageNum,size,employee,hiredNum);
 			}catch(SQLException e) {
 				throw new RuntimeException(e);
 			}
