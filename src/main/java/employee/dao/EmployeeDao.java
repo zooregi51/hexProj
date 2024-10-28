@@ -31,7 +31,22 @@ public class EmployeeDao {
 			// TODO: handle finally clause
 		}
 	}
-	
+	public int selectCountHired(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where retireddate Is null");
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
 	public List<Employee> select(Connection conn,int firstRow, int endRow)throws SQLException{
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

@@ -8,9 +8,19 @@
 <title>사원현황 관리</title>
 </head>
 <body>
-
+<div style="text-align:center;vertical-align:middle;
+width:160px;height:40px;margin-right:5px">
+재직자
+</div>
+<div style="text-align:center;vertical-align:middle;
+width:160px;height:40px;margin-right:5px">
+${employeePage.getHiredNum() }
+</div>
+<br/>
 <table border="1">
+<thead>
 	<tr>
+		<td><input type='checkbox' id="allCheck" onclick="allChk(this);"/></td>
 		<td>구분</td>
 		<td>입사일</td>
 		<td>사원번호</td>
@@ -23,6 +33,8 @@
 		<td>퇴사일</td>
 		<td>상태</td>
 	</tr>
+</thead>
+<tbody>
 <c:if test="${employeePage.hasNoEmployees() }">
 	<tr>
 		<td colspan="4">사원이 없습니다.</td>
@@ -30,6 +42,7 @@
 </c:if>
 <c:forEach var="employee" items="${employeePage.employee }">
 	<tr>
+		<td><input type="checkbox" name="checkedempno" value="${employee.empno }"/></td>
 		<td>${employee.empform }</td>
 		<td>${employee.hireddate }</td>
 		<td>No-1400${employee.empno }</td>
@@ -63,6 +76,7 @@
 		</td>
 	</tr>
 </c:if>
+</tbody>
 </table>
 </body>
 </html>

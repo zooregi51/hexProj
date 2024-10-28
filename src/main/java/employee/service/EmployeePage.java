@@ -11,11 +11,14 @@ public class EmployeePage {
 	private int totalPages;
 	private int startPage;
 	private int endPage;
+	private int hiredNum;
 	
-	public EmployeePage(int total,int currentPage, int size,List<Employee> employee) {
+	public EmployeePage(int total,int currentPage, int size,List<Employee> employee,int hirednum) {
 		this.total=total;
 		this.currentPage=currentPage;
 		this.employee=employee;
+		this.hiredNum=hirednum;
+		System.out.println(hiredNum);
 		if(total==0) {
 			totalPages=0;
 			startPage=0;
@@ -34,6 +37,10 @@ public class EmployeePage {
 		if(endPage>totalPages)endPage=totalPages;
 	}
 	
+	public int getHiredNum() {
+		return hiredNum;
+	}
+
 	public boolean hasNoEmployees() {
 		return total==0;
 	}
