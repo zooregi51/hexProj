@@ -19,12 +19,21 @@ public class EmployeeListService {
 		try (Connection conn = ConnectionProvider.getConnection()){
 			int total=employeeDao.selectCount(conn);
 			int hiredNum=employeeDao.selectCountHired(conn);
+			int permanentNum=employeeDao.selectCountPermanent(conn);
+			int contractNum=employeeDao.selectCountContract(conn);
+			int temporaryNum=employeeDao.selectCountTemporary(conn);
+			int dispatchedNum=employeeDao.selectCountDispatched(conn);
+			int commissionedNum=employeeDao.selectCountCommissioned(conn);
+			int dailyjobNum=employeeDao.selectCountDailyJob(conn);
+			int retiredNum=employeeDao.selectCountRetired(conn);
+			
 			if(total>0) {
 				firstRow=(pageNum-1)*size+1;
 				endRow=firstRow+size-1;
 				employee=employeeDao.select(conn, firstRow, endRow);
 			}
-			return new EmployeePage(total,pageNum,size,employee,hiredNum);
+			return new EmployeePage(total,pageNum,size,employee,hiredNum,permanentNum,
+					contractNum,temporaryNum,dispatchedNum,commissionedNum,dailyjobNum,retiredNum);
 			}catch(SQLException e) {
 				throw new RuntimeException(e);
 			}

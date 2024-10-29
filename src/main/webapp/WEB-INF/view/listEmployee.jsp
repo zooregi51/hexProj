@@ -8,18 +8,33 @@
 <title>사원현황 관리</title>
 </head>
 <body>
-<div style="text-align:center;vertical-align:middle;
-width:160px;height:40px;margin-right:5px">
-재직자
-</div>
-<div style="text-align:center;vertical-align:middle;
-width:160px;height:40px;margin-right:5px">
-${employeePage.getHiredNum() }
-</div>
+<table border="1" width="1000" height="100" align="left">
+	<tr align="center">
+		<td>재직자</td>
+		<td>정규직</td>
+		<td>계약직</td>
+		<td>임시직</td>
+		<td>파견직</td>
+		<td>위촉직</td>
+		<td>일용직</td>
+		<td>퇴사자</td>
+		<td>전체</td>
+	</tr>
+	<tr align="center">
+		<td>${employeePage.getHiredNum() }</td>
+		<td>${employeePage.getPermanentNum() }</td>
+		<td>${employeePage.getContractNum() }</td>
+		<td>${employeePage.getTemporaryNum() }</td>
+		<td>${employeePage.getDispatchedNum() }</td>
+		<td>${employeePage.getCommissionedNum() }</td>
+		<td>${employeePage.getDailyjobNum() }</td>
+		<td>${employeePage.getRetiredNum() }</td>
+		<td>${employeePage.getTotal() }</td>
+</table>
 <br/>
 <table border="1">
 <thead>
-	<tr>
+	<tr align="center">
 		<td><input type='checkbox' id="allCheck" onclick="allChk(this);"/></td>
 		<td>구분</td>
 		<td>입사일</td>
