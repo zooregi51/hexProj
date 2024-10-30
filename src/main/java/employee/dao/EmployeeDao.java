@@ -21,6 +21,7 @@ public class EmployeeDao {
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery("select count(*) from employee");
+			//사원 전체 수를 세는 쿼리
 			if(rs.next()) {
 				return rs.getInt(1);
 			}
@@ -31,7 +32,142 @@ public class EmployeeDao {
 			// TODO: handle finally clause
 		}
 	}
-	
+	public int selectCountHired(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where retireddate Is null");
+			//재직자 수를 세는 쿼리
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
+	public int selectCountPermanent(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where empform = '정규직'");
+			//정규직 수를 세는 쿼리
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
+	public int selectCountContract(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where empform = '계약직'");
+			//계약직 수를 세는 쿼리
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
+	public int selectCountTemporary(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where empform = '임시직'");
+			//임시직 수를 세는 쿼리
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
+	public int selectCountDispatched(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where empform = '파견직'");
+			//파견직 수를 세는 쿼리
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
+	public int selectCountCommissioned(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where empform = '위촉직'");
+			//위촉직 수를 세는 쿼리
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
+	public int selectCountDailyJob(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where empform = '일용직'");
+			//일용직 수를 세는 쿼리
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
+	public int selectCountRetired(Connection conn)throws SQLException{
+		Statement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=conn.createStatement();
+			rs=stmt.executeQuery("select count(*) from employee where retireddate Is not null");
+			//퇴사자 수를 세는 쿼리
+			if(rs.next()) {
+				return rs.getInt(1);
+			}
+			return 0;
+		} finally {
+			JdbcUtil.close(rs);
+			JdbcUtil.close(stmt);
+			// TODO: handle finally clause
+		}
+	}
 	public List<Employee> select(Connection conn,int firstRow, int endRow)throws SQLException{
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

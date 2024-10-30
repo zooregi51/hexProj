@@ -1,9 +1,8 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <html>
 <head>
-    <title>사원 조회</title>
+    <title>사원 리스트</title>
     <style>
         table {
             width: 100%;
@@ -20,37 +19,31 @@
     </style>
 </head>
 <body>
-
-<h2>사원 조회</h2>
-
-<!-- 사원 리스트를 보여주는 테이블 -->
-<table>
-    <thead>
-        <tr>
-            <th>사원 번호</th>
-            <th>사원 이름</th>
-            <th>부서</th>
-            <th>직위</th>
-            <th>전화번호</th>
-            <th>이메일</th>
-            <th>기타 정보</th>
-        </tr>
-    </thead>
-    <tbody>
-        <!-- 사원 리스트 반복 출력 -->
-        <c:forEach var="employee" items="${employeeList}">
+    <h2>사원 리스트</h2>
+    <table>
+        <thead>
             <tr>
-                <td>${employee.empNo}</td>
-                <td>${employee.name}</td>
-                <td>${employee.dep}</td>
-                <td>${employee.empForm}</td>
-                <td>${employee.phone}</td>
-                <td>${employee.email}</td>
-                <td>${employee.other}</td>
+                <th>구분</th>
+                <th>사원번호</th>
+                <th>성명</th>
+                <th>부서</th>
+                <th>직위</th>
+                <th>근태기록</th>
             </tr>
-        </c:forEach>
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            <c:forEach var="employee" items="${employeeList}">
+                <tr>
+                    <td>${employee.empform}</td>
+                    <td>No-${employee.empno}</td>
+                    <td>${employee.name}</td>
+                    <td>${employee.dep}</td>
+                    <td>${employee.position}</td>
+                    <!-- 근태 기록 관리 링크 추가 -->
+        			<td><a href="/attendance/attendanceRecordList.do?empno=${employee.empno}">근태 기록 관리</a></td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
 </body>
 </html>
