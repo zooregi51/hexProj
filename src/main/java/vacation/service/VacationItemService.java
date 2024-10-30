@@ -1,12 +1,12 @@
-package mvc.service.employee;
+package vacation.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
 import jdbc.connection.ConnectionProvider;
-import mvc.dao.employee.VacationItemDao;
-import mvc.model.employee.VacationItem;
+import vacation.dao.VacationItemDao;
+import vacation.model.VacationItem;
 
 public class VacationItemService {
 	private VacationItemDao vacationItemDao = new VacationItemDao();

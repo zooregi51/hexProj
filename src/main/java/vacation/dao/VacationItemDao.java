@@ -1,4 +1,4 @@
-package mvc.dao.employee;
+package vacation.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import mvc.model.employee.VacationItem;
+import vacation.model.VacationItem;
 
 public class VacationItemDao {
 

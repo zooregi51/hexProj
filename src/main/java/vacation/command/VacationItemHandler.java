@@ -1,11 +1,13 @@
-package mvc.command.employee;
+package vacation.command;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import mvc.command.CommandHandler;
-import mvc.model.employee.VacationItem;
-import mvc.service.employee.VacationItemService;
-import java.util.List;
+import vacation.model.VacationItem;
+import vacation.service.VacationItemService;
 
 public class VacationItemHandler implements CommandHandler {
 	private VacationItemService vacationItemService = new VacationItemService();
