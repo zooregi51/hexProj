@@ -168,60 +168,33 @@ public class SalaryDao {
 	}
 
 	public ArrayList<ItemizedLedger> getItemLedger(Connection conn, String item, String year) throws SQLException {
-		String stmt = "select b.empform, b.name, b.dep, "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/01' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-01\",  "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/02' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-02\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/03' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-03\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/04' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-04\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/05' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-05\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/06' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-06\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/07' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-07\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/08' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-08\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/09' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-09\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/10' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-10\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/11' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-11\" , "
-				+ "(case when substr(a.salary_transfer_date, 1, 5) = '" + year
-				+ "/12' then a." + "salary_" + item
-				+ " end) as \"20" + year
-				+ "-12\"  "
-				+ "from salary a, "
-				+ "employee b "
-				+ "where a.salary_transfer_date is not null "
-				+ "and a.salary_emp_no = b.empno "
-				+ "and substr(a.salary_transfer_date, 1, 2) = ?";
+		String stmt = "SELECT "
+    + "b.empno AS empno, "
+    + "b.empform AS empform, "
+    + "b.name AS name, "
+    + "b.dep AS dep, "
+    + "b.position AS pos, "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-01' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-01\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-02' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-02\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-03' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-03\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-04' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-04\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-05' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-05\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-06' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-06\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-07' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-07\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-08' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-08\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-09' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-09\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-10' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-10\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-11' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-11\", "
+    + "SUM(CASE WHEN substr(a.salary_num, 3, 5) = '" + year + "-12' THEN a.salary_" + item + " ELSE 0 END) AS \"20" + year + "-12\" "
+    + "FROM salary a "
+    + "JOIN employee b ON a.salary_emp_no = b.empno "
+    + "WHERE "
+    + "    a.salary_transfer_date IS NOT NULL "
+    + "    AND substr(a.salary_num, 3, 2) = ? "
+    + "GROUP BY "
+    + "    b.empno, b.empform, b.name, b.dep, b.position "
+    + "ORDER BY "
+    + "    b.empno";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
@@ -242,15 +215,16 @@ public class SalaryDao {
 
 	private ItemizedLedger convertItemizeLedger(ResultSet rs, String year) throws SQLException {
 		ArrayList<Integer> sal = new ArrayList<>();
+		year = "20" + year;
 		for(int i = 1; i <= 12; ++i) {
 			String now = year + '-';
 			if(i < 10)
-				now += '0' + i;
+				now += "0" + i;
 			else
 				now += i;
 			sal.add(rs.getInt(now));
 		}
-		return new ItemizedLedger(rs.getString("empform"), rs.getString("empname"), rs.getString("dep"), sal);
+		return new ItemizedLedger(rs.getString("empform"), rs.getString("name"), rs.getString("dep"), sal, rs.getString("pos"));
 	}
 
 	public Salary getSalary(Connection conn, String empNo, String year, String month) throws SQLException {
