@@ -3,19 +3,16 @@ package attendance.service;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-
-import attendance.dao.EmployeeDao;
-import attendance.model.Employee;
+import attendance.dao.LeaveRecordDao;
+import attendance.model.LeaveRecord;
 import jdbc.connection.ConnectionProvider;
 
-public class EmployeeService {
+public class LeaveRecordService {
+    private LeaveRecordDao leaveRecordDao = new LeaveRecordDao();
 
-    private EmployeeDao employeeDao = new EmployeeDao();
-
-    // 사원 전체 리스트를 조회하는 메서드
-    public List<Employee> getEmployeeList() {
+    public List<LeaveRecord> getLeaveRecordsByEmpno(int empno) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            return employeeDao.selectAll(conn);
+            return leaveRecordDao.selectByEmpno(conn, empno);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
