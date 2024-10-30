@@ -8,9 +8,34 @@
 <title>사원현황 관리</title>
 </head>
 <body>
-
+<table border="1" width="1000" height="100" align="left">
+	<tr align="center">
+		<td>재직자</td>
+		<td>정규직</td>
+		<td>계약직</td>
+		<td>임시직</td>
+		<td>파견직</td>
+		<td>위촉직</td>
+		<td>일용직</td>
+		<td>퇴사자</td>
+		<td>전체</td>
+	</tr>
+	<tr align="center">
+		<td>${employeePage.getHiredNum() }</td>
+		<td>${employeePage.getPermanentNum() }</td>
+		<td>${employeePage.getContractNum() }</td>
+		<td>${employeePage.getTemporaryNum() }</td>
+		<td>${employeePage.getDispatchedNum() }</td>
+		<td>${employeePage.getCommissionedNum() }</td>
+		<td>${employeePage.getDailyjobNum() }</td>
+		<td>${employeePage.getRetiredNum() }</td>
+		<td>${employeePage.getTotal() }</td>
+</table>
+<br/>
 <table border="1">
-	<tr>
+<thead>
+	<tr align="center">
+		<td><input type='checkbox' id="allCheck" onclick="allChk(this);"/></td>
 		<td>구분</td>
 		<td>입사일</td>
 		<td>사원번호</td>
@@ -23,6 +48,8 @@
 		<td>퇴사일</td>
 		<td>상태</td>
 	</tr>
+</thead>
+<tbody>
 <c:if test="${employeePage.hasNoEmployees() }">
 	<tr>
 		<td colspan="4">사원이 없습니다.</td>
@@ -30,6 +57,7 @@
 </c:if>
 <c:forEach var="employee" items="${employeePage.employee }">
 	<tr>
+		<td><input type="checkbox" name="checkedempno" value="${employee.empno }"/></td>
 		<td>${employee.empform }</td>
 		<td>${employee.hireddate }</td>
 		<td>No-1400${employee.empno }</td>
@@ -63,6 +91,7 @@
 		</td>
 	</tr>
 </c:if>
+</tbody>
 </table>
 </body>
 </html>

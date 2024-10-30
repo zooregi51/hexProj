@@ -15,13 +15,14 @@
 <table border="1">
     <tr>
         <th>번호</th>
-        <th>사원 코드</th>
-        <th>근무 일자</th>
-        <th>출근 시간</th>
-        <th>퇴근 시간</th>
-        <th>근무 유형</th>
-        <th>승인 상태</th>
-        <th>총 초과 근무 시간</th>
+        <th>사원 번호</th>
+        <th>입력 일자</th>
+        <th>근태 항목</th>
+        <th>근태 기간 (시작시간)</th>
+        <th>근태 기간 (종료시간)</th>
+        <th>근태 일수</th>
+        <th>금액</th>
+        <th>적요</th>
         <th>수정</th>
         <th>삭제</th>
     </tr>
@@ -31,12 +32,13 @@
         <tr>
             <td>${record.recordId}</td>
             <td>${record.employeeId}</td>
-            <td>${record.workDate}</td>
+            <td>${record.entryDate}</td>
+            <td>${record.workType}</td>
             <td>${record.startTime}</td>
             <td>${record.endTime}</td>
-            <td>${record.workType}</td>
-            <td>${record.approvalStatus}</td>
-            <td>${record.totalOvertimeHours}</td>
+            <td>${record.workDays}</td>
+            <td>${record.amount}</td>
+            <td>${record.remarks}</td>
             <td><a href="attendance.do?action=edit&recordId=${record.recordId}">수정</a></td>
             <td><a href="attendance.do?action=delete&recordId=${record.recordId}">삭제</a></td>
         </tr>
@@ -46,13 +48,14 @@
 <!-- 근태 기록 추가 폼 -->
 <h3>새로운 근태 기록 추가</h3>
 <form action="attendance.do?action=add" method="post">
-    사원 코드: <input type="text" name="employeeId"><br>
-    근무 일자: <input type="date" name="workDate"><br>
-    출근 시간: <input type="time" name="startTime"><br>
-    퇴근 시간: <input type="time" name="endTime"><br>
-    근무 유형: <input type="text" name="workType"><br>
-    승인 상태: <input type="text" name="approvalStatus"><br>
-    총 초과 근무 시간: <input type="number" name="totalOvertimeHours"><br>
+    사원 번호: <input type="number" name="employeeId" required><br>
+    입력 일자: <input type="date" name="entryDate" required><br>
+    근태 항목: <input type="text" name="workType" required><br>
+    근태 시작 시간: <input type="time" name="startTime" required><br>
+    근태 종료 시간: <input type="time" name="endTime" required><br>
+    근태 일수: <input type="number" name="workDays" step="0.5" required><br>
+    금액: <input type="number" name="amount"><br>
+    적요: <input type="text" name="remarks"><br>
     <input type="submit" value="추가">
 </form>
 
