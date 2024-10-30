@@ -6,6 +6,58 @@
 <head>
 <meta charset="UTF-8">
 <title>사원현황 관리</title>
+<script type="text/javascript">
+// 1.모두 체크
+  function allChk(obj){
+      var chkObj = document.getElementsByName("checkedempno");
+      var rowCnt = chkObj.length - 1;
+      var check = obj.checked;
+      if (check) {﻿
+          for (var i=0; i<=rowCnt; i++){
+           if(chkObj[i].type == "checkbox")
+               chkObj[i].checked = true;
+          }
+      } else {
+          for (var i=0; i<=rowCnt; i++) {
+           if(chkObj[i].type == "checkbox"){
+               chkObj[i].checked = false;
+           }
+          }
+      }
+  } 
+
+//﻿2. 체크박스 선택된 것 삭제 처리 (N개) 
+   function fn_userDel(){
+
+  var userid = "";
+  var memberChk = document.getElementsByName("checkedempno");
+  var chked = false;
+  var indexid = false;
+  for(i=0; i < memberChk.length; i++){
+   if(memberChk[i].checked){
+    if(indexid){
+      userid = userid + '-';
+    }
+    userid = userid + memberChk[i].value;
+    indexid = true;
+   }
+  }
+  if(!indexid){
+   alert("삭제할 사용자를 체크해 주세요");
+   return;
+  }
+  document.userForm.delUserid.value = userid;       // 체크된 사용자 아이디를 '-'로 묶은 userid 를     
+
+                                                                              document.userForm.delUserid 의 value로 저장
+  
+  var agree=confirm("삭제 하시겠습니까?");
+     if (agree){
+   document.userForm.execute.value = "userDel";
+     document.userForm.submit();
+     }
+  }﻿
+
+</script> 
 </head>
 <body>
 <table border="1" width="1000" height="100" align="left">
@@ -21,18 +73,27 @@
 		<td>전체</td>
 	</tr>
 	<tr align="center">
-		<td>${employeePage.getHiredNum() }</td>
-		<td>${employeePage.getPermanentNum() }</td>
-		<td>${employeePage.getContractNum() }</td>
-		<td>${employeePage.getTemporaryNum() }</td>
-		<td>${employeePage.getDispatchedNum() }</td>
-		<td>${employeePage.getCommissionedNum() }</td>
-		<td>${employeePage.getDailyjobNum() }</td>
-		<td>${employeePage.getRetiredNum() }</td>
-		<td>${employeePage.getTotal() }</td>
+		<td><a href="list.do?pageNo=${employeePage.startPage }&searchForm=재직자">
+		${employeePage.getHiredNum() }</a></td>
+		<td><a href="list.do?pageNo=${employeePage.startPage}&searchForm=정규직">
+		${employeePage.getPermanentNum() }</a></td>
+		<td><a href="list.do?pageNo=${employeePage.startPage}&searchForm=계약직">
+		${employeePage.getContractNum() }</a></td>
+		<td><a href="list.do?pageNo=${employeePage.startPage}&searchForm=임시직">
+		${employeePage.getTemporaryNum() }</a></td>
+		<td><a href="list.do?pageNo=${employeePage.startPage}&searchForm=파견직">
+		${employeePage.getDispatchedNum() }</a></td>
+		<td><a href="list.do?pageNo=${employeePage.startPage}&searchForm=위촉직">
+		${employeePage.getCommissionedNum() }</a></td>
+		<td><a href="list.do?pageNo=${employeePage.startPage}&searchForm=일용직">
+		${employeePage.getDailyjobNum() }</a></td>
+		<td><a href="list.do?pageNo=${employeePage.startPage}&searchForm=퇴직자">
+		${employeePage.getRetiredNum() }</a></td>
+		<td><a href="list.do?pageNo=${employeePage.startPage}">
+		${employeePage.getTotal() }</a></td>
 </table>
 <br/>
-<table border="1">
+<table border="1" width="1000">
 <thead>
 	<tr align="center">
 		<td><input type='checkbox' id="allCheck" onclick="allChk(this);"/></td>
@@ -78,9 +139,9 @@
 </c:forEach>
 <c:if test="${employeePage.hasEmployees() }">
 	<tr>
-		<td colspan="4">
+		<td colspan="12">
 			<c:if test="${employeePage.startPage > 5 }">
-			<a href="list.do>pageNo=${employeePage.startPage-5 }">[이전]</a>
+			<a href="list.do?pageNo=${employeePage.startPage-5 }">[이전]</a>
 			</c:if>
 			<c:forEach var="pNo" begin="${employeePage.startPage }" end="${employeePage.endPage }">
 			<a href="list.do?pageNo=${pNo }">[${pNo }]</a>
@@ -93,5 +154,7 @@
 </c:if>
 </tbody>
 </table>
+<button type="button" onclick="location.href='list.do'">신규사원 등록</button>
+<button type="button">선택 삭제</button>
 </body>
 </html>

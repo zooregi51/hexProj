@@ -185,6 +185,29 @@ public class EmployeeDao {
 			// TODO: handle finally clause
 		}
 	}
+	public List<Employee> select(Connection conn,int firstRow, int endRow,String searchForm)throws SQLException{
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		try {
+			if(searchForm.equals("재직자")){
+				pstmt = conn.prepareStatement("select * from(select rownum as rnum,a.*from" + " (select * from employee where retireddate is null order by empno desc)" + " a where rownum <= ?)where rnum >= ?");
+			}else if(searchForm.equals("퇴직자")) {
+				pstmt = conn.prepareStatement("select * from(select rownum as rnum,a.*from" + " (select * from employee where retireddate is not null order by empno desc)" + " a where rownum <= ?)where rnum >= ?");		
+			}else {
+				pstmt = conn.prepareStatement("select * from(select rownum as rnum,a.*from" + " (select * from employee where empform='"+searchForm+"' order by empno desc)" + " a where rownum <= ?)where rnum >= ?");
+			}
+			pstmt.setInt(1,endRow);
+			pstmt.setInt(2,firstRow);
+			rs=pstmt.executeQuery();
+			List<Employee> result=new ArrayList<>();
+			while(rs.next()) {
+				result.add(convertEmployee(rs));
+			}
+			return result;
+		} finally {
+			// TODO: handle finally clause
+		}
+	}
 	private Employee convertEmployee(ResultSet rs)throws SQLException{
 		return new Employee(rs.getInt("empno"),rs.getString("empform"),rs.getString("name"),rs.getDate("hireddate"),rs.getDate("retireddate"),rs.getString("dep"),rs.getString("position"),rs.getString("registrationnum"),rs.getString("address"),rs.getString("phone"),rs.getString("email"),rs.getString("other"),rs.getInt("salary")
 				);
@@ -207,4 +230,5 @@ public class EmployeeDao {
 			// : handle finally clause
 		}
 	}
+	
 }
