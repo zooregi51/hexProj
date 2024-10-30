@@ -35,18 +35,51 @@ public class SalaryDao {
 						null),
 				rs.getString("salary_transfer_date"));
 	}
+	private Salary convertSalarySpecificationDetail(ResultSet rs) throws SQLException{		
+		return new Salary(rs.getString("salary_num"),
+				new Employee(rs.getInt("empno"), 
+						rs.getString("name"), 
+						rs.getString("empform"), 
+						rs.getString("dep"), 
+						rs.getString("position"), 
+						rs.getDate("hireddate"), 
+						rs.getInt("salary")), 
+				new Payment(rs.getInt("salary_salary"), 
+						rs.getInt("salary_food"), 
+						rs.getInt("salary_childcare"), 
+						rs.getInt("salary_position_allowance"), 
+						rs.getInt("salary_continuos_service"), 
+						rs.getInt("salary_nightduty"), 
+						rs.getInt("salary_bonus"), 
+						rs.getInt("salary_holiday")),
+				rs.getString("salary_transfer_date").substring(0, 11));
+	}
 
 	public ArrayList<SalarySpecification> getSpecification(Connection conn, String year, String month) throws SQLException {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("select b.empform, b.name, a.salary_emp_no, a.salary_salary, a.salary_food  "
+			pstmt = conn.prepareStatement("select "
+					+ "b.empform as empform, "
+					+ "b.name as name, "
+					+ "a.salary_emp_no as empno, "
+					+ "a.salary_salary as salary, "
+					+ "a.salary_food as food, "
+					+ "a.salary_childcare as childcare, "
+					+ "a.salary_position_allowance as position, "
+					+ "a.salary_continuos_service as continuos, "
+					+ "a.salary_nightduty as nightduty, "					
+					+ "a.salary_bonus as bonus, "					
+					+ "a.salary_holiday as holiday "					
 					+ "from salary a, "
 					+ "employee b "
-					+ "where substr(salary_num, 0, 7) = ? "
+					+ "where substr(salary_num, 1, 7) = ? "
 					+ "and a.salary_emp_no = b.empno");
 			
+			if(month.length() == 1) {
+				month = "0" + month;
+			}
 			pstmt.setString(1, year + '-' + month);
 			rs = pstmt.executeQuery();
 			ArrayList<SalarySpecification> result = new ArrayList<SalarySpecification>();
@@ -62,7 +95,13 @@ public class SalaryDao {
 
 	private SalarySpecification convertSpecification(ResultSet rs) throws SQLException {
 		// TODO Auto-generated method stub
-		return new SalarySpecification(rs.getString("empform"), rs.getString("empname"), rs.getInt("salary_salary") + rs.getInt("salary_food"), rs.getInt("salary_emp_no"));
+		return new SalarySpecification(rs.getString("empform"), 
+				rs.getString("name"), 
+				rs.getInt("salary") + rs.getInt("food") + 
+				rs.getInt("childcare") + rs.getInt("position") + 
+				rs.getInt("continuos") + rs.getInt("nightduty") + 
+				rs.getInt("bonus") + rs.getInt("holiday")				
+				, rs.getInt("empno"));
 	}
 
 	public ArrayList<Salary> getTransferNeeded(Connection conn) throws SQLException {
@@ -70,7 +109,8 @@ public class SalaryDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("SELECT a.salary_num, b.name, b.dep, a.salary_salary, a.salary_food, a.salary_transfer_date "
+			pstmt = conn.prepareStatement("SELECT a.salary_num, b.name, b.dep, "
+					+ "a.salary_salary, a.salary_food, a.salary_transfer_date "
 					+ "FROM salary a, "
 					+ "employee b "
 					+ "where salary_transfer_date is null "
@@ -218,15 +258,21 @@ public class SalaryDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("select * from salary "
+			pstmt = conn.prepareStatement("select * "
+					+ "from salary a, "
+					+ "employee b "
 					+ "where salary_emp_no = ? "
+					+ "and salary_emp_no = b.empno "
 					+ "and substr(salary_num, 1, 7) = ?");
 			pstmt.setInt(1, Integer.parseInt(empNo));
+			if(month.length() == 1) {
+				month = "0" + month;
+			}
 			pstmt.setString(2, year + "-" + month);
 			rs = pstmt.executeQuery();
 			Salary result = null;
 			while(rs.next()) {
-				result = convertSalary(rs);
+				result = convertSalarySpecificationDetail(rs);
 			}
 			return result;
 		}finally {
