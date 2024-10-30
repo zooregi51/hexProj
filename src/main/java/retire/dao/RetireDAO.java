@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import jdbc.JdbcUtil;
 import retire.model.Retirement;
 
 public class RetireDAO {
 
-    //퇴직처리할 목록(사원목록) 조회
+    //퇴직처리할 목록(사원목록) 조회!
     public List<Retirement> getRetirementList(Connection conn, String schType, String schText) throws SQLException {
 
         //Connection conn이란? 데이터베이스를 연결해주는 Java 인터페이스 객체
