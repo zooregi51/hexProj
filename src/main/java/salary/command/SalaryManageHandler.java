@@ -63,7 +63,7 @@ public class SalaryManageHandler implements CommandHandler {
 			int empno = Integer.parseInt((String) req.getAttribute("empno"));
 			String type = (String) req.getAttribute("type");
 			
-			Salary s = new Salary((String)req.getAttribute("salnum"), new Employee(empno, null, null, null, null, null, null), 
+			Salary s = new Salary((String)req.getAttribute("salnum"), new Employee(empno), 
 					new Payment(Integer.parseInt((String)req.getAttribute("salary")), 
 							Integer.parseInt((String)req.getAttribute("food")), 
 							Integer.parseInt((String)req.getAttribute("childcare")), 
