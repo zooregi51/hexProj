@@ -72,7 +72,6 @@ public class SalaryManageHandler implements CommandHandler {
 							Integer.parseInt((String) req.getAttribute("oncall")),
 							Integer.parseInt((String) req.getAttribute("bonus")),
 							Integer.parseInt((String) req.getAttribute("holiday"))),
-					null);
 
 			int result = 0;
 			if (type == "new")// Post + new = 입력
