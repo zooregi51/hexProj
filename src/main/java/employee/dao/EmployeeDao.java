@@ -230,5 +230,40 @@ public class EmployeeDao {
 			// : handle finally clause
 		}
 	}
-	
+	public int multiDelete(Connection conn,int[] empdelete)throws SQLException {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int res=0;//삭제 하는 사원의 수
+		int[] cnt=null;
+		try {
+			pstmt=conn.prepareStatement("delete from employee where empno=?");
+			for(int i=0;i<empdelete.length;i++) {
+				pstmt.setInt(1, empdelete[i]);
+				pstmt.addBatch();
+			}
+			cnt=pstmt.executeBatch();
+			for(int i=0;i<cnt.length;i++) {
+				if(cnt[i]==2) {
+					res++;
+				}
+			}
+			if(empdelete.length==res) {
+				conn.commit();
+			}else {
+				conn.rollback();
+			}
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return res;
+	}
 }
