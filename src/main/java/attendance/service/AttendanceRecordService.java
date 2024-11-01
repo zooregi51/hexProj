@@ -8,35 +8,11 @@ import attendance.model.AttendanceRecord;
 import jdbc.connection.ConnectionProvider;
 
 public class AttendanceRecordService {
-    private AttendanceRecordDao recordDao = new AttendanceRecordDao();
+    private AttendanceRecordDao attendanceRecordDao = new AttendanceRecordDao();
 
-    public List<AttendanceRecord> getAttendanceListByEmployeeId(String employeeId) {
+    public List<AttendanceRecord> getAttendanceRecordsByEmpno(int empno) {
         try (Connection conn = ConnectionProvider.getConnection()) {
-            return recordDao.selectByEmployeeId(conn, employeeId);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void addAttendanceRecord(AttendanceRecord record) {
-        try (Connection conn = ConnectionProvider.getConnection()) {
-            recordDao.insert(conn, record);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void updateAttendanceRecord(AttendanceRecord record) {
-        try (Connection conn = ConnectionProvider.getConnection()) {
-            recordDao.update(conn, record);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void deleteAttendanceRecord(int recordId) {
-        try (Connection conn = ConnectionProvider.getConnection()) {
-            recordDao.delete(conn, recordId);
+            return attendanceRecordDao.selectByEmpno(conn, empno);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
