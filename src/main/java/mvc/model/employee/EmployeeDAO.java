@@ -16,20 +16,14 @@ public class EmployeeDAO {
              ResultSet rs = pstmt.executeQuery()) {
             List<Employee> employeeList = new ArrayList<>();
             while (rs.next()) {
-                Employee employee = new Employee(
-                        rs.getInt("empNo"),
-                        rs.getString("empForm"),
-                        rs.getString("name"),
-                        rs.getDate("hiredDate"),
-                        rs.getString("dep"),
-                        rs.getString("registrationNum"),
-                        rs.getString("address"),
-                        rs.getString("phone"),
-                        rs.getString("email"),
-                        rs.getString("other"),
-                        rs.getInt("salary")
-                );
-                employeeList.add(employee);
+				/*
+				 * Employee employee = new Employee( rs.getInt("empNo"),
+				 * rs.getString("empForm"), rs.getString("name"), rs.getDate("hiredDate"),
+				 * rs.getString("dep"), rs.getString("registrationNum"),
+				 * rs.getString("address"), rs.getString("phone"), rs.getString("email"),
+				 * rs.getString("other"), rs.getInt("salary") );
+				 */
+                //employeeList.add(employee);
             }
             return employeeList;
         }//뷁
