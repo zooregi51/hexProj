@@ -1,4 +1,4 @@
-package mvc.model.employee;
+package vacation.model;
 
 public class VacationItem {
 	private int id; // 고유 식별자. 데이터베이스에서 각 휴가 항목을 구분하기 위한 기본 키로 사용됨.

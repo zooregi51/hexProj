@@ -1,15 +1,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <html>
 <head>
-<title>사원 등록</title>
+<title>社員登録</title>
 </head>
 <body>
-	<h2>사원 등록</h2>
+	<h2>社員登録</h2>
 	<form action="registerEmployee.do" method="post">
-		<label for="empNo">사원 번호:</label> <input type="text" id="empNo"
-			name="empNo" value="${nextEmpNo}" readonly><br>고용 형태:</label> <input
+		<label for="empNo">社員番号:</label> <input type="text" id="empNo"
+			name="empNo" value="${nextEmpNo}" readonly><br>雇用形態:</label> <input
 			type="text" id="empForm" name="empForm"><br> <label
-			for="name">이름:</label> <input type="text" id="name" name="name"><br>
+			for="name">名:</label> <input type="text" id="name" name="name"><br>
 		<label for="hiredDate">채용일:</label> <input type="date" id="hiredDate"
 			name="hiredDate"><br> <label for="retiredDate">퇴사일:</label>
 		<input type="date" id="retiredDate" name="retiredDate"><br>
