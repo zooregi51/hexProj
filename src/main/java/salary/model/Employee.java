@@ -11,6 +11,11 @@ public class Employee {
 	private Date empHiredDate;
 	private Integer salary;
 	
+	
+	
+	public Employee(Integer empId) {
+		this.empId = empId;
+	}
 	public Employee(Integer empId, String empName, String empForm, String empDepart, String empPos,
 			Date empHiredDate, Integer salary) {
 		this.empId = empId;

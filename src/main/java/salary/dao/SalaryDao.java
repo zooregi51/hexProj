@@ -16,44 +16,8 @@ import salary.model.Salary;
 import salary.model.SalarySpecification;
 
 public class SalaryDao {
-	private Salary convertSalary(ResultSet rs) throws SQLException{		
-		return new Salary(rs.getString("salary_num"),
-				new Employee(null, 
-						rs.getString("name"), 
-						null, 
-						rs.getString("dep"), 
-						null, 
-						null, 
-						rs.getInt("salary_salary")), 
-				new Payment(rs.getInt("salary_salary"), 
-						rs.getInt("salary_food"), 
-						null, 
-						null, 
-						null, 
-						null, 
-						null, 
-						null),
-				rs.getString("salary_transfer_date"));
-	}
-	private Salary convertSalarySpecificationDetail(ResultSet rs) throws SQLException{		
-		return new Salary(rs.getString("salary_num"),
-				new Employee(rs.getInt("empno"), 
-						rs.getString("name"), 
-						rs.getString("empform"), 
-						rs.getString("dep"), 
-						rs.getString("position"), 
-						rs.getDate("hireddate"), 
-						rs.getInt("salary")), 
-				new Payment(rs.getInt("salary_salary"), 
-						rs.getInt("salary_food"), 
-						rs.getInt("salary_childcare"), 
-						rs.getInt("salary_position_allowance"), 
-						rs.getInt("salary_continuos_service"), 
-						rs.getInt("salary_nightduty"), 
-						rs.getInt("salary_bonus"), 
-						rs.getInt("salary_holiday")),
-				rs.getString("salary_transfer_date").substring(0, 11));
-	}
+	
+	
 
 	public ArrayList<SalarySpecification> getSpecification(Connection conn, String year, String month) throws SQLException {
 		PreparedStatement pstmt = null;
@@ -109,9 +73,8 @@ public class SalaryDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("SELECT a.salary_num, b.name, b.dep, "
-					+ "a.salary_salary, a.salary_food, a.salary_transfer_date "
-					+ "FROM salary a, "
+			pstmt = conn.prepareStatement("select * "
+					+ "from salary a, "
 					+ "employee b "
 					+ "where salary_transfer_date is null "
 					+ "and a.salary_emp_no = b.empno");
@@ -146,7 +109,7 @@ public class SalaryDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("SELECT a.salary_num, b.name, b.dep, a.salary_salary, a.salary_food, a.salary_transfer_date "
+			pstmt = conn.prepareStatement("select * "
 					+ "FROM salary a, "
 					+ "employee b "
 					+ "where a.salary_transfer_date is not null "
@@ -165,6 +128,26 @@ public class SalaryDao {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
+	}
+	
+	private Salary convertSalary(ResultSet rs) throws SQLException{		
+		return new Salary(rs.getString("salary_num"),
+				new Employee(rs.getInt("empno"), 
+						rs.getString("name"), 
+						rs.getString("empform"), 
+						rs.getString("dep"), 
+						rs.getString("position"), 
+						rs.getDate("hireddate"), 
+						rs.getInt("salary")), 
+				new Payment(rs.getInt("salary_salary"), 
+						rs.getInt("salary_food"), 
+						rs.getInt("salary_childcare"), 
+						rs.getInt("salary_position_allowance"), 
+						rs.getInt("salary_continuos_service"), 
+						rs.getInt("salary_nightduty"), 
+						rs.getInt("salary_bonus"), 
+						rs.getInt("salary_holiday")),
+				rs.getString("salary_transfer_date"));
 	}
 
 	public ArrayList<ItemizedLedger> getItemLedger(Connection conn, String item, String year) throws SQLException {
@@ -253,6 +236,26 @@ public class SalaryDao {
 			JdbcUtil.close(rs);
 			JdbcUtil.close(pstmt);
 		}
+	}
+	
+	private Salary convertSalarySpecificationDetail(ResultSet rs) throws SQLException{		
+		return new Salary(rs.getString("salary_num"),
+				new Employee(rs.getInt("empno"), 
+						rs.getString("name"), 
+						rs.getString("empform"), 
+						rs.getString("dep"), 
+						rs.getString("position"), 
+						rs.getDate("hireddate"), 
+						rs.getInt("salary")), 
+				new Payment(rs.getInt("salary_salary"), 
+						rs.getInt("salary_food"), 
+						rs.getInt("salary_childcare"), 
+						rs.getInt("salary_position_allowance"), 
+						rs.getInt("salary_continuos_service"), 
+						rs.getInt("salary_nightduty"), 
+						rs.getInt("salary_bonus"), 
+						rs.getInt("salary_holiday")),
+				rs.getString("salary_transfer_date").substring(0, 11));
 	}
 
 	public Employee getEmployee(Connection conn, int empno) throws SQLException {
