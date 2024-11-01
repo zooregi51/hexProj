@@ -34,6 +34,8 @@ private GetSalarySpecificationService specSer = new GetSalarySpecificationServic
 				month = now.getMonth() + "";
 			ArrayList<SalarySpecification> spec = specSer.getSalarySpecification(year, month);
 			req.setAttribute("specs", spec);
+			req.setAttribute("year", year);
+			req.setAttribute("month", month);
 			return "/WEB-INF/view/salary/salarySpecification.jsp?year=" + year + "month=" + month;
 		}
 		

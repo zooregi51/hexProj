@@ -21,13 +21,13 @@ private GetSalarySpecificationService specSer = new GetSalarySpecificationServic
 		String item = req.getParameter("item");
 		String year = req.getParameter("year");
 		LocalDate now = LocalDate.now();
-		if(year == null)
+		if(year == null || year.equals(""))
 			year = now.getYear() + "";
-		if(item == null)
+		if(item == null || item.equals(""))
 			item = "salary";
-		
 		ArrayList<ItemizedLedger> spec = specSer.getItemLedger(item, year);
 		req.setAttribute("itemizedLedger", spec);
+		req.setAttribute("year", year);
 		return "/WEB-INF/view/salary/salaryItemizedLedger.jsp?item=" + item + "year=" + year;
 		
 	}

@@ -15,6 +15,6 @@
 	EmployeeDao employeeDao = new EmployeeDao();
 	int res=employeeDao.multiDelete(empdelete);
 %>
-
+<form action="delete.do" method="post">
 </body>
 </html>
