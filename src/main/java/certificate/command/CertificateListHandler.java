@@ -20,7 +20,7 @@ public class CertificateListHandler implements CommandHandler {
 		}
 		CertificatePage certificatePage = certificateListService.getCertificatePage(pageNo);
 		req.setAttribute("certificatePage", certificatePage);
-		return "/WEB-INF/view/listCertificate.jsp";
+		return "/WEB-INF/view/certificate/listCertificate.jsp";
 	}
 
 }
