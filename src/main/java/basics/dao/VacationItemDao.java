@@ -1,4 +1,4 @@
-package vacation.dao;
+package basics.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import vacation.model.VacationItem;
+import basics.model.VacationItem;
 
 public class VacationItemDao {
 

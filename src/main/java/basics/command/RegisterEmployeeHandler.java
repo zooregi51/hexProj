@@ -1,4 +1,4 @@
-package mvc.command.employee;
+package basics.command;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -6,9 +6,9 @@ import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import basics.model.Employee;
+import basics.service.RegisterEmployeeService;
 import mvc.command.CommandHandler;
-import mvc.model.employee.Employee;
-import mvc.service.employee.RegisterEmployeeService;
 
 public class RegisterEmployeeHandler implements CommandHandler {
 	private static final String FORM_VIEW = "/WEB-INF/view/newEmployeeForm.jsp"; // 등록 폼 JSP 경로

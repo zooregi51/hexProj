@@ -1,11 +1,11 @@
-package mvc.service.employee;
+package basics.service;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import basics.dao.EmployeeDao;
+import basics.model.Employee;
 import jdbc.connection.ConnectionProvider;
-import mvc.dao.employee.EmployeeDao;
-import mvc.model.employee.Employee;
 
 public class RegisterEmployeeService {
     private EmployeeDao employeeDao = new EmployeeDao();
