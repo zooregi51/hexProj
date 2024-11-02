@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>가입</title>
+<title>급여 입력</title>
 </head>
 <body>
 	<form action="salaryManage.do" method="post">
@@ -24,27 +24,27 @@
 			<input type="number" name="food" value=0>
 		</p>
 		<p>
-			기본급 : <br>
+			보육수당 : <br>
 			<input type="number" name="childcare" value=0>
 		</p>
 		<p>
-			기본급 : <br>
+			직책수당 : <br>
 			<input type="number" name="position" value=0>
 		</p>
 		<p>
-			기본급 : <br>
+			근속수당 : <br>
 			<input type="number" name="longservice" value=0>
 		</p>
 		<p>
-			기본급 : <br>
+			당직수당 : <br>
 			<input type="number" name="oncall" value=0>
 		</p>
 		<p>
-			기본급 : <br>
+			상여금 : <br>
 			<input type="number" name="bonus" value=0>
 		</p>
 		<p>
-			기본급 : <br>
+			휴일수당 : <br>
 			<input type="number" name="holiday" value=0>
 		</p>
 		<input type="submit" value="저장">
