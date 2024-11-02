@@ -11,7 +11,7 @@ import basics.service.RegisterEmployeeService;
 import mvc.command.CommandHandler;
 
 public class RegisterEmployeeHandler implements CommandHandler {
-	private static final String FORM_VIEW = "/WEB-INF/view/newEmployeeForm.jsp"; // 등록 폼 JSP 경로
+	private static final String FORM_VIEW = "/WEB-INF/view/basics/newEmployeeForm.jsp"; // 등록 폼 JSP 경로
 	private RegisterEmployeeService employeeService = new RegisterEmployeeService(); // 사원 등록 서비스
 
 	@Override
@@ -44,7 +44,7 @@ public class RegisterEmployeeHandler implements CommandHandler {
 
 		// 등록 완료 후 성공 페이지로 이동
 		req.setAttribute("newEmployeeNo", employeeReq.getEmpNo());
-		return "/WEB-INF/view/newEmployeeSuccess.jsp";
+		return "/WEB-INF/view/basics/newEmployeeSuccess.jsp";
 	}
 
 	// 폼 데이터로부터 Employee 객체를 생성하는 메서드
