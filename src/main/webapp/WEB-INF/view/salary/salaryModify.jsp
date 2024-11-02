@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>가입</title>
+<title>급여 수정</title>
 </head>
 <body>
 	<form action="salaryManage.do" method="post">
@@ -17,35 +17,35 @@
 		</p>
 		<p>
 			기본급 : <br>
-			<input type="number" name="salary" value="${emp.getSalary()}">
+			<input type="number" name="salary" value="${salary.getSalPayment().getSalBasicSalary()}">
 		</p>
 		<p>
 			식비 : <br>
-			<input type="number" name="food" value=0>
+			<input type="number" name="food" value="${salary.getSalPayment().getSalFood() }">
 		</p>
 		<p>
-			기본급 : <br>
-			<input type="number" name="childcare" value=0>
+			보육수당 : <br>
+			<input type="number" name="childcare" value="${salary.getSalPayment().getSalChildCare()}">
 		</p>
 		<p>
-			기본급 : <br>
-			<input type="number" name="position" value=0>
+			직책수당 : <br>
+			<input type="number" name="position" value="${salary.getSalPayment().getSalPositionSalary() }">
 		</p>
 		<p>
-			기본급 : <br>
-			<input type="number" name="longservice" value=0>
+			근속수당 : <br>
+			<input type="number" name="longservice" value="${salary.getSalPayment().getSalLongService() }">
 		</p>
 		<p>
-			기본급 : <br>
-			<input type="number" name="oncall" value=0>
+			당직수당 : <br>
+			<input type="number" name="oncall" value="${salary.getSalPayment().getSalOncall() }">
 		</p>
 		<p>
-			기본급 : <br>
-			<input type="number" name="bonus" value=0>
+			상여금 : <br>
+			<input type="number" name="bonus" value="${salary.getSalPayment().getSalBonus() }">
 		</p>
 		<p>
-			기본급 : <br>
-			<input type="number" name="holiday" value=0>
+			휴일수당 : <br>
+			<input type="number" name="holiday" value="${salary.getSalPayment().getSalHoliday() }">
 		</p>
 		<input type="submit" value="저장">
 	</form>

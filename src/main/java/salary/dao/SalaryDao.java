@@ -27,6 +27,7 @@ public class SalaryDao {
 			pstmt = conn.prepareStatement("select "
 					+ "b.empform as empform, "
 					+ "b.name as name, "
+					+ "b.dep as dep, "
 					+ "a.salary_emp_no as empno, "
 					+ "a.salary_salary as salary, "
 					+ "a.salary_food as food, "
@@ -41,9 +42,6 @@ public class SalaryDao {
 					+ "where substr(salary_num, 1, 7) = ? "
 					+ "and a.salary_emp_no = b.empno");
 			
-			if(month.length() == 1) {
-				month = "0" + month;
-			}
 			pstmt.setString(1, year + '-' + month);
 			rs = pstmt.executeQuery();
 			ArrayList<SalarySpecification> result = new ArrayList<SalarySpecification>();
@@ -64,7 +62,7 @@ public class SalaryDao {
 				rs.getInt("salary") + rs.getInt("food") + 
 				rs.getInt("childcare") + rs.getInt("position") + 
 				rs.getInt("continuos") + rs.getInt("nightduty") + 
-				rs.getInt("bonus") + rs.getInt("holiday")				
+				rs.getInt("bonus") + rs.getInt("holiday"), rs.getString("dep")				
 				, rs.getInt("empno"));
 	}
 
@@ -254,8 +252,7 @@ public class SalaryDao {
 						rs.getInt("salary_continuos_service"), 
 						rs.getInt("salary_nightduty"), 
 						rs.getInt("salary_bonus"), 
-						rs.getInt("salary_holiday")),
-				rs.getString("salary_transfer_date").substring(0, 11));
+						rs.getInt("salary_holiday")));
 	}
 
 	public Employee getEmployee(Connection conn, int empno) throws SQLException {
@@ -263,7 +260,7 @@ public class SalaryDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("select * from employee where salary_emp_no = ?");
+			pstmt = conn.prepareStatement("select * from employee where empno = ?");
 			pstmt.setInt(1, empno);
 			rs = pstmt.executeQuery();
 			Employee result = null;
@@ -279,7 +276,7 @@ public class SalaryDao {
 
 	private Employee convertEmployee(ResultSet rs) throws SQLException {
 		return new Employee(rs.getInt("empno"), rs.getString("name"), rs.getString("empform"), rs.getString("dep"), 
-				rs.getString("pos"), rs.getDate("hireddate"), rs.getInt("salary"));
+				rs.getString("position"), rs.getDate("hireddate"), rs.getInt("salary"));
 		//(Integer empId, String empName, String empForm, String empDepart, String empPos, Date empHiredDate)
 	}
 
@@ -288,19 +285,19 @@ public class SalaryDao {
 		ResultSet rs = null;
 		// 해당 월의 인원들 급여 내역 출력
 		try {
-			pstmt = conn.prepareStatement("SELECT distinct e.empform, e.empno, e.name, e.dep, e.pos "
-					+ "FROM employee e "
-					+ "LEFT JOIN salary s ON e.empno = s.salary_emp_no "
-					+ "WHERE s.salary_num IS NULL OR "
+			pstmt = conn.prepareStatement("SELECT distinct empform, empno, name, dep, position, hireddate, salary "
+					+ "FROM employee "
+					+ "LEFT JOIN salary ON empno = salary_emp_no "
+					+ "WHERE salary_num IS NULL OR "
 					+ "      NOT EXISTS ( "
 					+ "          SELECT 1 "
-					+ "          FROM salary s2 "
-					+ "          WHERE s2.salary_emp_no = e.empno "
-					+ "          AND SUBSTR(s2.salary_num, 1, 7) = ?) "
-					+ "order by e.empno");
-			pstmt.setString(0, year + "-" + month);
+					+ "          FROM salary s "
+					+ "          WHERE s.salary_emp_no = empno "
+					+ "          AND SUBSTR(s.salary_num, 1, 7) = ?) "
+					+ "order by empno");
+			pstmt.setString(1, year + "-" + month);
 			rs = pstmt.executeQuery();
-			ArrayList<Employee> result = null;
+			ArrayList<Employee> result = new ArrayList<>();
 			while(rs.next()) {
 				result.add(convertEmployee(rs));
 			}
@@ -317,15 +314,15 @@ public class SalaryDao {
 			pstmt = conn.prepareStatement("insert into salary(salary_num, salary_emp_no, salary_salary, salary_food, salary_childcare, "
 					+ "salary_position_allowance, salary_continuos_service, salary_holiday, salary_bonus) values "
 					+ "(?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			pstmt.setString(0, s.getSalNum());
-			pstmt.setInt(1, s.getEmployee().getEmpId());
-			pstmt.setInt(2, s.getSalPayment().getSalBasicSalary());
-			pstmt.setInt(3, s.getSalPayment().getSalFood());
-			pstmt.setInt(4, s.getSalPayment().getSalChildCare());
-			pstmt.setInt(5, s.getSalPayment().getSalPositionSalary());
-			pstmt.setInt(6, s.getSalPayment().getSalLongService());
-			pstmt.setInt(7, s.getSalPayment().getSalHoliday());
-			pstmt.setInt(8, s.getSalPayment().getSalBonus());
+			pstmt.setString(1, s.getSalNum());
+			pstmt.setInt(2, s.getEmployee().getEmpId());
+			pstmt.setInt(3, s.getSalPayment().getSalBasicSalary());
+			pstmt.setInt(4, s.getSalPayment().getSalFood());
+			pstmt.setInt(5, s.getSalPayment().getSalChildCare());
+			pstmt.setInt(6, s.getSalPayment().getSalPositionSalary());
+			pstmt.setInt(7, s.getSalPayment().getSalLongService());
+			pstmt.setInt(8, s.getSalPayment().getSalHoliday());
+			pstmt.setInt(9, s.getSalPayment().getSalBonus());
 			
 			return pstmt.executeUpdate();
 			
@@ -343,7 +340,7 @@ public class SalaryDao {
 					+ "salary_food = ?, "
 					+ "salary_childcare = ?, "
 					+ "salary_position_allowance = ?, "
-					+ "salary_continuos_service = ? "
+					+ "salary_continuos_service = ?, "
 					+ "salary_holiday = ?, "
 					+ "salary_bonus = ? "
 					+ "where "

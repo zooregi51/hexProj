@@ -24,11 +24,11 @@
 		</c:if>
 		<c:forEach var="emp" items="${emps}">
 			<tr>
-				<td>${spec.getEmpForm()}</td>
-				<td>${spec.getEmpId()}</td>
+				<td>${emp.getEmpForm()}</td>
+				<td>${emp.getEmpId()}</td>
 				<td><a href="salaryManage.do?type=new&empno=${emp.getEmpId()}">${emp.getEmpName()}</a></td>
-				<td>${spec.getEmpDepart()}</td>
-				<td>${spec.getEmpPos()}</td>
+				<td>${emp.getEmpDepart()}</td>
+				<td>${emp.getEmpPos()}</td>
 			</tr>
 		</c:forEach>
 	</table>
