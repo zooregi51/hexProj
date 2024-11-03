@@ -1,20 +1,18 @@
 package attendance.service;
 
-import java.sql.Connection;
-import java.util.List;
 import attendance.dao.LeaveRecordDao;
 import attendance.model.LeaveRecord;
-import jdbc.connection.ConnectionProvider;
+import java.sql.Connection;
+import java.util.List;
 
 public class LeaveRecordService {
+    private LeaveRecordDao leaveRecordDao;
 
-    private LeaveRecordDao leaveRecordDao = new LeaveRecordDao();
+    public LeaveRecordService(Connection conn) {
+        this.leaveRecordDao = new LeaveRecordDao(conn);
+    }
 
-    public List<LeaveRecord> getAllLeaveRecords() {
-        try (Connection conn = ConnectionProvider.getConnection()) {
-            return leaveRecordDao.selectAllRecords(conn);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    public List<LeaveRecord> getAllLeaveRecords() throws Exception {
+        return leaveRecordDao.selectAllRecords();
     }
 }
