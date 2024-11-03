@@ -55,6 +55,6 @@ public class VacationItemHandler implements CommandHandler {
 		List<VacationItem> vacationItems = vacationItemService.getVacationItems();
 		req.setAttribute("vacationItems", vacationItems);
 
-		return "/WEB-INF/view/vacationItem.jsp";
+		return "/WEB-INF/view/basics/vacationItem.jsp";
 	}
 }
