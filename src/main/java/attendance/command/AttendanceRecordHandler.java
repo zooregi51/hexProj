@@ -7,15 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import attendance.model.AttendanceRecord;
-import attendance.service.AttendanceService;
 import mvc.command.CommandHandler;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import attendance.service.AttendanceRecordService;
-import attendance.model.AttendanceRecord;
-import mvc.command.CommandHandler;
-import java.util.List;
-
 
 public class AttendanceRecordHandler implements CommandHandler {
 
