@@ -8,9 +8,9 @@
 <title>제 증명서 발급대장</title>
 </head>
 <body>
-
-<table border="1">
-	<tr>
+<h1>제 증명서 발급대장</h1>
+<table border="1" width="1000">
+	<tr align="center">
 		<td>발급번호</td>
 		<td>발급대장</td>
 		<td>발급용도</td>
@@ -26,7 +26,7 @@
 	</tr>
 </c:if>
 <c:forEach var="certificate" items="${certificatePage.certificate }">
-	<tr>
+	<tr align="center">
 		<td>${certificate.certificate_Id }</td>
 		<td>${certificate.certificate_Register }</td>
 		<td>${certificate.certificate_Purpose }</td>
@@ -53,5 +53,6 @@
 	</tr>
 </c:if>
 </table>
+
 </body>
 </html>

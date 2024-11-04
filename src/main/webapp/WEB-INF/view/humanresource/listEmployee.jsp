@@ -69,7 +69,7 @@
 	</tr>
 </c:if>
 <c:forEach var="employee" items="${employeePage.employee }">
-	<tr>
+	<tr align="center">
 		<td><input type="checkbox" name="checkedempno" value="${employee.empno }"/></td>
 		<td>${employee.empform }</td>
 		<td>${employee.hireddate }</td>
