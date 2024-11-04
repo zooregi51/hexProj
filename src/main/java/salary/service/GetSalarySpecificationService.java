@@ -48,7 +48,7 @@ public class GetSalarySpecificationService {
 
 	public ArrayList<ItemizedLedger> getItemLedger(String item, String year) {
 		try(Connection conn = ConnectionProvider.getConnection()){
-			ArrayList<ItemizedLedger> spec = ledD.getItemLedger(conn, item, year);
+			ArrayList<ItemizedLedger> spec = ledD.getItemLedger(conn, item, year.substring(2, 4));
 			return spec;
 		}catch (SQLException e) {
 			throw new RuntimeException(e);

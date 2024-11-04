@@ -45,4 +45,9 @@ public class Payment {
 		return salHoliday;
 	}
 	
+	public Integer getSumPayment() {
+		return salFood + salBasicSalary + salBonus + salChildCare 
+				+ salHoliday + salLongService + salOncall 
+				+ salPositionSalary;
+	}
 }

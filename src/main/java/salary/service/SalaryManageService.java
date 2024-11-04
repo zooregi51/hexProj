@@ -69,12 +69,8 @@ public class SalaryManageService {
 	}
 
 
-	public ArrayList<Employee> getEmployeeList() {
+	public ArrayList<Employee> getEmployeeList(String year, String month) {
 		try(Connection conn = ConnectionProvider.getConnection()){
-			LocalDate now = LocalDate.now();
-			String year, month;
-			year = now.getYear() + "";
-			month = now.getMonth() + "";
 			ArrayList<Employee> spec = ledD.getEmployeeList(conn, year, month);
 			return spec;
 		}catch (SQLException e) {
