@@ -6,12 +6,14 @@ public class ItemizedLedger {
 	String empForm;
 	String empName;
 	String dep;
+	String pos;
 	ArrayList<Integer> yearSal;
-	public ItemizedLedger(String empForm, String empName, String dep, ArrayList<Integer> yearSal) {
+	public ItemizedLedger(String empForm, String empName, String dep, ArrayList<Integer> yearSal, String pos) {
 		this.empForm = empForm;
 		this.empName = empName;
 		this.dep = dep;
 		this.yearSal = yearSal;
+		this.pos = pos;
 	}
 	public String getEmpForm() {
 		return empForm;
@@ -24,6 +26,9 @@ public class ItemizedLedger {
 	}
 	public ArrayList<Integer> getYearSal() {
 		return yearSal;
+	}
+	public String getPos() {
+		return pos;
 	}
 	
 }

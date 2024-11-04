@@ -17,6 +17,13 @@ public class Salary {
 		this.transferDate = transferDate;
 	}
 
+	public Salary(String salNum, Employee employee, Payment payment) {
+		this.salNum = salNum;
+		this.employee = employee;
+		this.salPayment = payment;
+		this.transferDate = "";
+	}
+
 	public String getSalNum() {
 		return salNum;
 	}
