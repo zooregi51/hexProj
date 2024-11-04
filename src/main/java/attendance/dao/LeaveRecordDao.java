@@ -1,31 +1,35 @@
 package attendance.dao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import attendance.model.LeaveRecord;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import attendance.model.LeaveRecord;
 
 public class LeaveRecordDao {
+    private Connection conn;
 
-    public List<LeaveRecord> selectAllRecords(Connection conn) throws Exception {
-        String sql = "SELECT RecordID, EmployeeID, LeaveType, TotalDays, DaysUsed, RemainingDays FROM LeaveRecords";
-        try (PreparedStatement pstmt = conn.prepareStatement(sql);
-             ResultSet rs = pstmt.executeQuery()) {
+    public LeaveRecordDao(Connection conn) {
+        this.conn = conn;
+    }
 
-            List<LeaveRecord> records = new ArrayList<>();
+    public List<LeaveRecord> selectAllRecords() throws SQLException {
+        List<LeaveRecord> records = new ArrayList<>();
+        String sql = "SELECT leave_id, empno, leave_type, total_days, days_used, remaining_days FROM LeaveRecords";
+
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                records.add(new LeaveRecord(
-                    rs.getInt("RecordID"),
-                    rs.getInt("EmployeeID"),
-                    rs.getString("LeaveType"),
-                    rs.getInt("TotalDays"),
-                    rs.getInt("DaysUsed"),
-                    rs.getInt("RemainingDays")
-                ));
+                LeaveRecord record = new LeaveRecord(
+                    rs.getInt("leave_id"),
+                    rs.getInt("empno"),
+                    rs.getString("leave_type"),
+                    rs.getInt("total_days"),
+                    rs.getInt("days_used"),
+                    rs.getInt("remaining_days")
+                );
+                records.add(record);
             }
-            return records;
         }
+        return records;
     }
 }
