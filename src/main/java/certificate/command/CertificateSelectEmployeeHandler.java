@@ -17,6 +17,6 @@ public class CertificateSelectEmployeeHandler implements CommandHandler {
 			empno = Integer.parseInt(empnoVal);
 		}
 		return FORM_VIEW;
-	}
 
+	}
 }

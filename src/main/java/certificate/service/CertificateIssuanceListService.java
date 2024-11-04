@@ -70,5 +70,7 @@ public class CertificateIssuanceListService {
 			throw new RuntimeException(e);
 		}
 
+	
+
 	}
 }
