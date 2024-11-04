@@ -23,7 +23,7 @@ public class LeaveRecordHandler implements CommandHandler {
             List<LeaveRecord> leaveRecords = service.getAllLeaveRecords();
             req.setAttribute("leaveRecords", leaveRecords);
         }
-
+//sex
         return "/WEB-INF/view/attendance/leaveRecordList.jsp";
     }
 }
