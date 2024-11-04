@@ -25,7 +25,7 @@ public class LeaveRecord {
         this.remarks = remarks;
     }
 
-    // Getters
+    // Getters gg
     public int getLeaveId() { return leaveId; }
     public int getEmpno() { return empno; }
     public String getLeaveType() { return leaveType; }
