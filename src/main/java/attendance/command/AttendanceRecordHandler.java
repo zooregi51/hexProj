@@ -7,26 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import attendance.model.AttendanceRecord;
-import attendance.service.AttendanceService;
 import mvc.command.CommandHandler;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import attendance.model.AttendanceRecord;
-import attendance.service.AttendanceService;
-import mvc.command.CommandHandler;
-import java.util.List;
-
+import attendance.service.AttendanceRecordService;
 
 public class AttendanceRecordHandler implements CommandHandler {
 
-    private AttendanceService attendanceService = new AttendanceService();
+    private AttendanceRecordService attendanceRecordService = new AttendanceRecordService();
 
     @Override
     public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        String employeeId = req.getParameter("employeeId");
-        List<AttendanceRecord> records = attendanceService.getAttendanceListByEmployeeId(employeeId);
-
-        req.setAttribute("attendanceRecords", records);
-        return "/attendanceRecord.jsp";
+        int empno = Integer.parseInt(req.getParameter("empno"));
+        
+        // empno에 따른 근태 기록 가져오기
+        List<AttendanceRecord> attendanceRecords = attendanceRecordService.getAttendanceRecordsByEmpno(empno);
+        
+        req.setAttribute("attendanceRecords", attendanceRecords); // JSP에 전달할 데이터 설정
+        req.setAttribute("empno", empno); // empno를 JSP에 전달
+        //
+        return "/WEB-INF/view/attendance/attendanceRecord.jsp"; // 수정된 경로로 반환
     }
 }
