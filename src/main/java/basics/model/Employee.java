@@ -1,4 +1,4 @@
-package mvc.model.employee;
+package basics.model;
 
 import java.util.Date;
 import java.util.Map;

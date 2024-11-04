@@ -230,18 +230,18 @@ public class EmployeeDao {
 			// : handle finally clause
 		}
 	}
-	public int multiDelete(Connection conn,int[] empdelete)throws SQLException {
+	public int multiDelete(Connection conn,String[] empdelete)throws SQLException {
 		PreparedStatement pstmt=null;
-		ResultSet rs=null;
 		int res=0;//삭제 하는 사원의 수
 		int[] cnt=null;
 		try {
 			pstmt=conn.prepareStatement("delete from employee where empno=?");
 			for(int i=0;i<empdelete.length;i++) {
-				pstmt.setInt(1, empdelete[i]);
-				pstmt.addBatch();
+				pstmt.setInt(1, Integer.parseInt(empdelete[i]));
+				pstmt.addBatch(); //쿼리를 pstmt에 모두 쌓아 한번에 처리
 			}
-			cnt=pstmt.executeBatch();
+			cnt = pstmt.executeBatch();
+			//현재 certificate를 가지는 employee 데이터를 삭제 할 수 없음
 			for(int i=0;i<cnt.length;i++) {
 				if(cnt[i]==2) {
 					res++;
