@@ -25,6 +25,19 @@ import salary.service.SalaryTransferService;
  * ArrayList<SalaryLedgerMonth> ledgerMonth 해당 달의 급여대장을 DB로부터 저장하는 자료형으로서 view에 ledgerMonth로 세팅
  */
 
+/*
+* 給与台帳ページ
+* /salary/salLedger.do の要請が入ってきたら処理するハンドラ
+* GET要請+term parameterが入ってきた時、該当の詳細給与台帳を出力するサービスを実行する。
+* GET要請+year parameterが入ってきた時、該当年度の月別給与台帳を出力するサービスを実行する。
+* GET要請だけが入ってきた時、現在年度を持ってきて現在年度の月別給与台帳を出力するサービスを実行する。
+*
+* String year reqに入っている yearというパラメータから値を取り出す
+* String term reqに入っている term というパラメータから値を取り出す
+* ArrayList<Salary>ledgerDetail該当月の社員の詳細給与台帳をDBから保存する資料型としてviewにledgerDetailでセッティング
+* ArrayList<SalaryLedgerMonth>ledgerMonth該当月の給与台帳をDBから保存する資料型としてviewにledgerMonthでセッティング
+*/
+
 public class SalaryLedgerHandler implements CommandHandler {
 
 	private GetSalaryLedgerService ledgerSer = new GetSalaryLedgerService();
