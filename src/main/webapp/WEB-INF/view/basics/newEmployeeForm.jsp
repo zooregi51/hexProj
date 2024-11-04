@@ -14,6 +14,7 @@
 			name="empNo" value="${nextEmpNo}" readonly><br>雇用形態:</label> <input
 			type="text" id="empForm" name="empForm"><br> <label
 			for="name">氏名:</label> <input type="text" id="name" name="name"><br>
+
 		<!-- 입사일 날짜 선택 필드 -->
 		<label for="hiredDate">入社日:</label> <input type="text" id="hiredDate"
 			name="hiredDate"><br>
@@ -30,11 +31,13 @@
 		<label for="address">現在所:</label> <input type="text" id="address"
 			name="address"><br> <label for="phone">携帯番号:</label> <input
 			type="text" id="phone" name="phone"><br> <label
+                                                      
 			for="email">E-mail:</label> <input type="email" id="email"
 			name="email"><br> <label for="other">備考:</label> <input
 			type="text" id="other" name="other"><br> <label
 			for="salary">給与:</label> <input type="text" id="salary" name="salary"><br>
 		<input type="submit" value="登録">
+
 	</form>
 
 	<script>

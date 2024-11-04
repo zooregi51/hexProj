@@ -22,6 +22,7 @@ public class EmployeeDeleteService {
 			throw new RuntimeException();
 		}
 	}
+	//브랜치 테스트
 	
 	private boolean canDelete(int empno,Employee employee) {
 		return employee.getEmpno().equals(empno);
