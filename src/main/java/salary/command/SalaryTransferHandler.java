@@ -48,7 +48,7 @@ public class SalaryTransferHandler implements CommandHandler {
 	public String process(HttpServletRequest req, HttpServletResponse res) throws Exception {
 		
 		if(req.getMethod().equalsIgnoreCase("GET")) {
-			ArrayList<Salary> salaries = transferSer.getSalary();
+			ArrayList<Salary> salaries = transferSer.getEmpsTransferNeeded();
 			req.setAttribute("salaries", salaries);
 			return "/WEB-INF/view/salary/salaryTransfer.jsp";
 			
