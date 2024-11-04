@@ -10,11 +10,16 @@
 <title>Employee Delete</title>
 </head>
 <body>
-<%
-	String[] empdelete=request.getParameterValues("checkedempno");
-	EmployeeDao employeeDao = new EmployeeDao();
-	int res=employeeDao.multiDelete(empdelete);
-%>
+
+<script type="text/javascript">
+	alert("체크된 글 모두 삭제 성공");
+	location.href="list.do";
+</script>
+
+<script type="text/javascript">
+	alert("체크된 글 모두 삭제 실패");
+	location.href="list.do"
+</script>
 
 </body>
 </html>

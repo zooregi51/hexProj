@@ -1,16 +1,15 @@
 package certificate.service;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import employee.dao.EmployeeDao;
-import employee.model.Employee;
-import employee.service.EmployeePage;
-import certificate.dao.*;
-import certificate.model.*;
+import certificate.dao.CertificateDao;
+import certificate.model.Certificate;
 import jdbc.connection.ConnectionProvider;
-public class CertificateListService {
 
+public class CertificateIssuanceListService {
+	
 	private CertificateDao certificateDao=new CertificateDao();
 	private int size=30;
 	
@@ -30,5 +29,4 @@ public class CertificateListService {
 				throw new RuntimeException(e);
 			}
 	}
-	
 }
