@@ -7,7 +7,7 @@
 <body>
 	<h2>休暇項目設定</h2>
 
-	<!-- 休暇sㄴ 항목 추가/수정 폼 -->
+	<!-- 休暇ㄴㄴsㄴ 항목 추가/수정 폼 -->
 	<form action="vacationItem.do" method="post">
 		<input type="hidden" name="action"
 			value="${selectedItem != null ? 'update' : 'add'}"> <input
