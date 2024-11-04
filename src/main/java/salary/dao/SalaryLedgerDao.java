@@ -12,6 +12,44 @@ import salary.model.Payment;
 import salary.model.Salary;
 import salary.model.SalaryLedgerMonth;
 
+/*
+ * selectLedgerMonth(Connection conn, String year)
+ * DB와 연결된 상태 정보, 년도를 입력 받아
+ * 사원들의 해당 년도의 각 달의 급여 정보의 합을 결과 값으로 받고
+ * 그것을 SalaryLedgerMonth라는 객체로 전환 시켜 생성된 객체들의 리스트를 반환한다.
+ * 
+ * convertLedgerMonth(ResultSet rs)
+ * 쿼리의 결과 값을 받아 SalaryLedgerMonth 객체로 전환시키는 메서드
+ * 
+ * selectLedgerDetail(Connection conn, String yearMonth)
+ * DB와 연결된 상태 정보, 년도를 입력 받아
+ * 해당 기간의 사원들의 급여 정보들을 결과 값으로 받고
+ * 그것을 Salary 객체로 전환시켜 생성된 객체들의 리스트를 반환한다.
+ * 
+ * convertSalary(ResultSet rs)
+ * 쿼리의 결과 값을 받아 Salary 객체로 전환시키는 메서드
+ * 
+ * */
+
+/*
+* selectLedgerMonth(Connection conn, String year)
+* DBと接続された状態情報、年を入力してもらい
+* 社員の当該年度の各月の給与情報の合計を結果値として受け取り
+* それをSalary Ledger Monthというオブジェクトに切り替えて生成されたオブジェクトのリストを返す。
+*
+* convertLedgerMonth(ResultSet rs)
+* クエリーの結果値を受けてSalaryLedgerMonthオブジェクトに切り替えるメソッド
+*
+* selectLedgerDetail(Connection conn, String yearMonth)
+* DBと接続された状態情報、年を入力してもらい
+* 当該期間の社員の給与情報を結果値として受け取り
+* それをSalaryオブジェクトに切り替えて生成されたオブジェクトのリストを返す。
+*
+* convertSalary(ResultSet rs)
+* クエリーの結果値を受けてSalaryオブジェクトに切り替えるメソッド
+*
+* */
+
 public class SalaryLedgerDao {
 	public ArrayList<SalaryLedgerMonth> selectLedgerMonth(Connection conn, String year)throws SQLException{
 		PreparedStatement pstmt = null;
