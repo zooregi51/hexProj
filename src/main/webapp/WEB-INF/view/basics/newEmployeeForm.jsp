@@ -9,26 +9,26 @@
 		<label for="empNo">社員番号:</label> <input type="text" id="empNo"
 			name="empNo" value="${nextEmpNo}" readonly><br>雇用形態:</label> <input
 			type="text" id="empForm" name="empForm"><br> <label
-			for="name">名:</label> <input type="text" id="name" name="name"><br>
-		<label for="hiredDate">채용일:</label> <input type="date" id="hiredDate"
-			name="hiredDate"><br> <label for="retiredDate">퇴사일:</label>
+			for="name">氏名:</label> <input type="text" id="name" name="name"><br>
+		<label for="hiredDate">入社日:</label> <input type="date" id="hiredDate"
+			name="hiredDate"><br> <label for="retiredDate">退社日:</label>
 		<input type="date" id="retiredDate" name="retiredDate"><br>
 
-		<label for="dep">부서:</label> <input type="text" id="dep" name="dep"><br>
+		<label for="dep">部署:</label> <input type="text" id="dep" name="dep"><br>
 
-		<label for="position">직위:</label> <input type="text" id="position"
-			name="position"><br> <label for="registrationNum">등록
-			번호:</label> <input type="text" id="registrationNum" name="registrationNum"><br>
+		<label for="position">職位:</label> <input type="text" id="position"
+			name="position"><br> <label for="registrationNum">個人ID番号:
+			</label> <input type="text" id="registrationNum" name="registrationNum"><br>
 
-		<label for="address">주소:</label> <input type="text" id="address"
-			name="address"><br> <label for="phone">전화 번호:</label> <input
+		<label for="address">現在所:</label> <input type="text" id="address"
+			name="address"><br> <label for="phone">携帯番号:</label> <input
 			type="text" id="phone" name="phone"><br> <label
-			for="email">이메일:</label> <input type="email" id="email" name="email"><br>
+			for="email">E-mail:</label> <input type="email" id="email" name="email"><br>
 
-		<label for="other">기타:</label> <input type="text" id="other"
-			name="other"><br> <label for="salary">급여:</label> <input
+		<label for="other">備考:</label> <input type="text" id="other"
+			name="other"><br> <label for="salary">給与:</label> <input
 			type="text" id="salary" name="salary"><br> <input
-			type="submit" value="등록">
+			type="submit" value="登録">
 	</form>
 </body>
 </html>
