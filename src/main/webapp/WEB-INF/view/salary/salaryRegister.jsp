@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!-- 급여 변경 페이지 -->
+<!-- emp 특정 사원의 정보를 핸들러에서 세팅 -->
+<!--給与変更ページ-->
+<!-- emp 特定社員の情報をハンドラーでセッティング-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +12,8 @@
 <title>급여 입력</title>
 </head>
 <body>
+	<!-- emp로 부터 사원 정보를 가져오고 입력된 내용을 post 요청하는 form -->
+	<!-- empから社員情報を取得し、入力された内容をpost要請するフォーム-->
 	<form action="salaryManage.do" method="post">
 		<p>
 			<input type="hidden" name="empno" value="${emp.getEmpId()}">

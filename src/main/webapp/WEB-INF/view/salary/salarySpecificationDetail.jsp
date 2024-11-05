@@ -3,11 +3,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
+<!-- 급여 세부 명세서 페이지 -->
+<!-- specDetail 특정 기간 특정 사원의 급여 정보를 핸들러에서 세팅 -->
+<!-- 給与詳細明細書ページ -->
+<!--specDetail特定期間特定社員の給与情報をハンドラーでセッティング-->
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>급여 상세 대장</title>
+<!-- 급여 명세서 css -->
+<!--給与明細書css-->
 <style>
 table {
 	width: 100%;
@@ -31,7 +38,8 @@ th {
 </style>
 </head>
 <body>
-
+<!-- 특정 사원의 상세 급여 명세서를 테이블로 생성해서 보여줌 -->
+<!-- 特定社員の詳細給与明細書をテーブルで生成して見せる -->
 	<h1>${specDetail.getSalNum().substring(0, 4)} 년 ${specDetail.getSalNum().substring(5, 7)} 월 급여 명세서</h1>
 	<table>
 		<tr>

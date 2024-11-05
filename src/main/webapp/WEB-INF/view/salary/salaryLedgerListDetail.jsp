@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
+<!-- 상세 급여 대장 페이지-->
+<!-- ledgerDetail 사원들의 상세 급여대장을 핸들러에서 세팅 -->
+<!-- 詳細給与台帳ページ-->
+<!--ledgerDetail社員の詳細給与台帳をハンドラーでセッティング-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,11 +32,15 @@
 		<td>휴일수당</td>
 		<td>지급총액</td>
 	</tr>
+<!-- ledgerDetail가 비어있으면 상세 급여 대장 내역이 없음을 출력 -->
+<!--ledgerDetailが空だと、詳細給与台帳の内訳がないことを出力-->
 <c:if test="${ledgerDetail.isEmpty()}">
 	<tr>
 		<td colspan="4">급여 목록이 없습니다.</td>
 	</tr>
 </c:if>
+<!-- ledgerDetail에 들어있는 급여 내역만큼 출력 -->
+<!--ledger Detailに入っている給与内訳だけ出力-->
 <c:forEach var="salary" items="${ledgerDetail}">
 	<tr>
 		<td>${salary.getEmployee().getEmpForm()}</td>
