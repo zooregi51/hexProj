@@ -12,7 +12,6 @@ import jdbc.connection.ConnectionProvider;
 public class CertificateListService {
 
 	private CertificateDao certificateDao=new CertificateDao();
-	private EmployeeDao employeeDao = new EmployeeDao();
 	private int size=30;
 	
 	public CertificatePage getCertificatePage(int pageNum) {

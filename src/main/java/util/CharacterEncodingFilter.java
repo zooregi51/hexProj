@@ -11,6 +11,7 @@ import javax.servlet.ServletResponse;
 
 public class CharacterEncodingFilter implements Filter {
 
+	//encoding
 	private String encoding;
 	
 	@Override
