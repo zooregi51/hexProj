@@ -10,7 +10,13 @@
 <!-- 項目別給与台帳ページ-->
 <!--itemized Ledger 社員の項目別給与台帳をハンドラーでセッティング-->
 
-<%@include file="../includes/header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>급여 상세 대장</title>
+</head>
+<body>
 	<!-- 연도, 상세 급여 설정하는 폼 -->
 	<!-- 年度、詳細給与を設定するフォーム-->
 	<form action="salaryItemizedLedger.do" method="get">
@@ -102,4 +108,5 @@
             out.print("</tr>");
 		%>
 	</table>
-<%@include file="../includes/footer.jsp"%>
+</body>
+</html>

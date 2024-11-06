@@ -8,8 +8,11 @@
 <!-- 給与詳細明細書ページ -->
 <!--specDetail特定期間特定社員の給与情報をハンドラーでセッティング-->
 
-<%@include file="../includes/header.jsp"%>
-
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>급여 상세 대장</title>
 <!-- 급여 명세서 css -->
 <!--給与明細書css-->
 <style>
@@ -33,6 +36,8 @@ th {
 	background-color: #ffff99;
 }
 </style>
+</head>
+<body>
 <!-- 특정 사원의 상세 급여 명세서를 테이블로 생성해서 보여줌 -->
 <!-- 特定社員の詳細給与明細書をテーブルで生成して見せる -->
 	<h1>${specDetail.getSalNum().substring(0, 4)} 년 ${specDetail.getSalNum().substring(5, 7)} 월 급여 명세서</h1>
@@ -130,4 +135,5 @@ th {
 
 	</table>
 	<p>귀하의 노고에 감사드리며, 수고 많으셨습니다.</p>
-<%@include file="../includes/footer.jsp"%>
+</body>
+</html>
