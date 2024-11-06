@@ -8,13 +8,7 @@
 <!--給与支給社員選択ページ-->
 <!--emps社員情報のリストをハンドラーでセッティング-->
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>급여지급 사원 선택</title>
-</head>
-<body>
+<%@include file="../includes/header.jsp"%>
 	<table border="1">
 		<tr>
 			<td>구분</td>
@@ -44,5 +38,4 @@
 			</tr>
 		</c:forEach>
 	</table>
-</body>
-</html>
+<%@include file="../includes/footer.jsp"%>

@@ -6,13 +6,7 @@
 <!-- salaries 사원들의 급여 정보를 핸들러에서 세팅 -->
 <!--給与管理ページ-->
 <!-- salaries 社員たちの給与情報をハンドラーでセッティング-->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>급여 관리</title>
-</head>
-<body>
+<%@include file="../includes/header.jsp"%>
 	<!-- 신규 추가를 위한 사원 목록으로 이동하기 위한 앵커 -->
 	<!-- 新規追加のための社員リストに移動するためのアンカー -->
 	<a href="salaryManage.do?type=new">[신규추가]</a>
@@ -43,5 +37,4 @@
 			</tr>
 		</c:forEach>
 	</table>
-</body>
-</html>
+<%@include file="../includes/footer.jsp"%>
