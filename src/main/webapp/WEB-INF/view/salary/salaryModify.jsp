@@ -5,13 +5,7 @@
 <!-- salary 특정 사원의 급여 정보를 핸들러에서 세팅 -->
 <!--給与変更ページ-->
 <!-- salary 特定社員の給与情報をハンドラーでセッティング-->
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>급여 수정</title>
-</head>
-<body>
+<%@include file="../includes/header.jsp"%>
 	<!-- salary로 부터 급여 정보를 가져오고 입력된 내용을 post 요청하는 form -->
 	<!-- salaryから給与情報を取得し、入力された内容をpost要請するフォーム-->
 	<form action="salaryManage.do" method="post">
@@ -55,5 +49,4 @@
 		</p>
 		<input type="submit" value="저장">
 	</form>
-</body>
-</html>
+<%@include file="../includes/footer.jsp"%>

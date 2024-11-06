@@ -51,7 +51,7 @@ import salary.model.SalaryLedgerMonth;
 * */
 
 public class SalaryLedgerDao {
-	public ArrayList<SalaryLedgerMonth> selectLedgerMonth(Connection conn, String year)throws SQLException{
+	public ArrayList<SalaryLedgerMonth> selectLedgerMonth(Connection conn, int year)throws SQLException{
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
@@ -64,7 +64,7 @@ public class SalaryLedgerDao {
 					+ "group by substr(salary_num, 1, 7) "
 					+ "order by substr(salary_num, 1, 7)");
 			
-			pstmt.setString(1, year);
+			pstmt.setString(1, Integer.toString(year));
 			rs = pstmt.executeQuery();
 			ArrayList<SalaryLedgerMonth> result = new ArrayList<SalaryLedgerMonth>();
 			while(rs.next()) {
