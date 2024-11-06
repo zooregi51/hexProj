@@ -5,24 +5,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>제 증명서 발급대장</title>
+<title>第証明書発行台帳</title>
 </head>
 <body>
-<h1>제 증명서 발급대장</h1>
+<h1>第証明書発行台帳</h1>
 <table border="1" width="1000">
 	<tr align="center">
-		<td>발급번호</td>
-		<td>발급대장</td>
-		<td>발급용도</td>
-		<td>구분</td>
-		<td>성명</td>
-		<td>부서</td>
-		<td>직위</td>
-		<td>발급일</td>
+		<td>発行番号</td>
+		<td>発行台帳</td>
+		<td>発行用途</td>
+		<td>区分</td>
+		<td>氏名</td>
+		<td>部署</td>
+		<td>職位</td>
+		<td>発行日</td>
 	</tr>
 <c:if test="${certificatePage.hasNoCertificates() }">
 	<tr>
-		<td colspan="4">제 증명서 발급대장이 없습니다.</td>
+		<td colspan="4">証明書発行台帳がありません</td>
 	</tr>
 </c:if>
 <c:forEach var="certificate" items="${certificatePage.certificate }">

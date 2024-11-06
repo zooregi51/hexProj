@@ -6,22 +6,22 @@
 <head>
 <link href="humanResourceCss.css" rel="stylesheet" type="text/css">
 <meta charset="UTF-8">
-<title>사원현황 관리</title>
+<title>社員の現況/管理</title>
 </head>
 <body>
-<h1>사원현황/관리</h1>
+<h1>社員の現況/管理</h1>
 <form action="deleteEmployee.do" method="post" id="multidelete">
 <table border="1" width="1000" height="100" align="left">
 	<tr align="center">
-		<td bgcolor=#F642C0 ><font color="white">재직자</font></td>
-		<td bgcolor=#79CEFF><font color="white">정규직</font></td>
-		<td bgcolor=#79CEFF><font color="white">계약직</font></td>
-		<td bgcolor=#79CEFF><font color="white">임시직</font></td>
-		<td bgcolor=#79CEFF><font color="white">파견직</font></td>
-		<td bgcolor=#79CEFF><font color="white">위촉직</font></td>
-		<td bgcolor=#79CEFF><font color="white">일용직</font></td>
-		<td bgcolor=#B5B5B5><font color="white">퇴사자</font></td>
-		<td bgcolor=#545454><font color="white">전체</font></td>
+		<td bgcolor=#F642C0 ><font color="white">在職者</font></td>
+		<td bgcolor=#79CEFF><font color="white">正社員</font></td>
+		<td bgcolor=#79CEFF><font color="white">契約職</font></td>
+		<td bgcolor=#79CEFF><font color="white">臨時職</font></td>
+		<td bgcolor=#79CEFF><font color="white">派遣職</font></td>
+		<td bgcolor=#79CEFF><font color="white">委嘱職</font></td>
+		<td bgcolor=#79CEFF><font color="white">日雇い</font></td>
+		<td bgcolor=#B5B5B5><font color="white">退社者</font></td>
+		<td bgcolor=#545454><font color="white">全体</font></td>
 	
 	</tr>
 	<tr align="center">
@@ -49,23 +49,23 @@
 <thead>
 	<tr align="center">
 		<td><input type='checkbox' name="all" onclick="allChk(this.checked);"/></td>
-		<td>구분</td>
-		<td>입사일</td>
-		<td>사원번호</td>
-		<td>성명</td>
-		<td>부서</td>
-		<td>직위</td>
-		<td>주민번호</td>
-		<td>휴대폰</td>
-		<td>이메일</td>
-		<td>퇴사일</td>
-		<td>상태</td>
+		<td>区分</td>
+		<td>入社日</td>
+		<td>社員番号</td>
+		<td>氏名</td>
+		<td>部署</td>
+		<td>職位</td>
+		<td>住民番号</td>
+		<td>携帯電話</td>
+		<td>メール</td>
+		<td>退社日</td>
+		<td>状態</td>
 	</tr>
 </thead>
 <tbody>
 <c:if test="${employeePage.hasNoEmployees() }">
 	<tr>
-		<td colspan="4">사원이 없습니다.</td>
+		<td colspan="4">社員がいません。</td>
 	</tr>
 </c:if>
 <c:forEach var="employee" items="${employeePage.employee }">
@@ -82,10 +82,10 @@
 		<td>${employee.email }</td>
 		<td>${employee.retireddate }</td>
 		<c:if test="${employee.retireddate != null}">
-			<td>퇴직</td>
+			<td>退職</td>
 		</c:if>
 		<c:if test="${employee.retireddate == null}">
-			<td>재직</td>
+			<td>在職</td>
 		</c:if>
 	</tr>
 </c:forEach>
@@ -106,8 +106,9 @@
 </c:if>
 </tbody>
 </table>
-<button type="button" onclick="location.href='list.do'">신규사원 등록</button>
-<input type="submit" value="선택 삭제">
+${ctxPath = pageContext.request.contextPath ; ''}
+<button type="button" onclick="location.href='${ctxPath}/registerEmployee.do'">新規社員登録</button>
+<input type="submit" value="選択削除">
 </form>
 
 </body>
