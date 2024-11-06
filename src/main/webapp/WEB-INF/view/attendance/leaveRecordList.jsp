@@ -21,7 +21,7 @@
     <script>
         // 사원 번호를 클릭했을 때 상세 정보 페이지로 이동하는 함수 / 社員番号をクリックしたときに詳細情報ページに移動する関数
         function openDetail(empno) {
-            window.location.href = "/JSPboard/attendance/leaveRecordDetail.do?empno=" + empno; /* 클릭한 사원 번호를 쿼리 매개변수로 전달하여 URL에 추가합니다 / クリックした社員番号をクエリパラメータとしてURLに追加します */
+            window.location.href = "/attendance/leaveRecordDetail.do?empno=" + empno; /* 클릭한 사원 번호를 쿼리 매개변수로 전달하여 URL에 추가합니다 / クリックした社員番号をクエリパラメータとしてURLに追加します */
         }
     </script>
 </head>
