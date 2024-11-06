@@ -24,19 +24,19 @@ public class RetireListHandler implements CommandHandler {
 	    //이동할 .jsp 파일 정의
 	    String returnJsp = "";
 
-        System.out.println(":::: 요청받은 URL ::::"+uri);
+        System.out.println("요청받은 URL"+uri);
         
         try {
         
 		    //HTTP METHOD GET방식일때
 		    if(req.getMethod().equalsIgnoreCase("GET")) {
 	
-		        System.out.println(":::: HTTP METHOD = GET ::::");
+		        System.out.println("HTTP METHOD = GET ");
 	
 		        // 퇴직목록 이동 및 목록조회
 	    	    if("/retire/retireList.do".equals(uri)) {
 	
-	    	        System.out.println(":::: /retire/retireList.do 탈퇴처리 목록 이동 ::::");
+	    	        System.out.println("/retire/retireList.do 탈퇴처리 목록 이동");
 	
 	    	        List<Retirement> list = retireListService.getRetirementList(req);
 	
@@ -47,7 +47,7 @@ public class RetireListHandler implements CommandHandler {
 	    	     // 퇴직처리 팝업 호출
 	    	    }else if("/retire/retireState.do".equals(uri)) {
 	
-	    	        System.out.println(":::: /retire/retireState.do 탈퇴처리 팝업 호출 ::::");
+	    	        System.out.println("/retire/retireState.do 탈퇴처리 팝업 호출");
 	
 	    	        returnJsp = "/WEB-INF/view/retire/retireState.jsp";
 	
@@ -56,7 +56,7 @@ public class RetireListHandler implements CommandHandler {
 	        //HTTP METHOD POST방식일때
 		    }else if(req.getMethod().equalsIgnoreCase("POST")) {
 	
-	            System.out.println(":::: HTTP METHOD = POST ::::");
+	            System.out.println("HTTP METHOD = POST");
 	
 	            // 퇴직처리 서비스 호출
 	           if("/retire/retireState.do".equals(uri)) {
@@ -78,7 +78,7 @@ public class RetireListHandler implements CommandHandler {
 			// TODO: handle exception
 		}
 	
-        System.out.println(":::: 이동할 JSP ::::"+returnJsp);
+        System.out.println("이동할 JSP"+returnJsp);
 
 	    return returnJsp;
 
