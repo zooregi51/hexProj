@@ -15,7 +15,7 @@ public class EmployeeDeleteHandler implements CommandHandler {
 		String[] empdelete=req.getParameterValues("checkedempno");
 		EmployeeDao employeeDao=new EmployeeDao();
 		employeeDeleteService.multiDelete(empdelete);
-		//gg
+		
 		return FORM_VIEW;
 	}
 
