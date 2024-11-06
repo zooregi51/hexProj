@@ -37,7 +37,7 @@ public class GetSalaryLedgerService {
 	// 년도를 받아 특정 년도의 급여대장을 가져옴
 	public ArrayList<SalaryLedgerMonth> getYearLedgerMonth(int year){
 		try(Connection conn = ConnectionProvider.getConnection()){
-			ArrayList<SalaryLedgerMonth> ledgerMonth = ledD.selectLedgerMonth(conn, year + "");
+			ArrayList<SalaryLedgerMonth> ledgerMonth = ledD.selectLedgerMonth(conn, year);
 			
 			return ledgerMonth;
 		}catch (SQLException e) {
