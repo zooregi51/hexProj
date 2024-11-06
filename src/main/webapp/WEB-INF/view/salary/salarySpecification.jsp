@@ -7,7 +7,13 @@
 <!--給与明細ページ-->
 <!--specs 特定期間社員の給与情報をハンドラーでセッティング-->
 
-<%@include file="../includes/header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>급여 명세서</title>
+</head>
+<body>
 	
 	<!-- 연도, 달 설정하는 폼 -->
 	<!-- 年、月を設定するフォーム-->
@@ -67,4 +73,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-<%@include file="../includes/footer.jsp"%>
+</body>
+</html>

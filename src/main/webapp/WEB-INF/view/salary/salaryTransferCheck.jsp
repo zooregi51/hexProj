@@ -5,7 +5,13 @@
 <!-- salaries 이체된 않은 급여 정보들을 핸들러에서 세팅 -->
 <!--給与振込確認ページ-->
 <!-- salaries 振替されていない給与情報をハンドラーでセッティング-->
-<%@include file="../includes/header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>급여 이체</title>
+</head>
+<body>
 <!-- 기간 설정하는 폼 -->
 <!-- 시작 날짜, 끝 날짜 설정 -->
 <!-- 期間設定するフォーム --->
@@ -53,4 +59,5 @@
 	</tr>
 </c:forEach>
 </table>
-<%@include file="../includes/footer.jsp"%>
+</body>
+</html>

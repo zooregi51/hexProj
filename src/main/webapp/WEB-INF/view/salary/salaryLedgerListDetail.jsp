@@ -7,7 +7,13 @@
 <!-- ledgerDetail 사원들의 상세 급여대장을 핸들러에서 세팅 -->
 <!-- 詳細給与台帳ページ-->
 <!--ledgerDetail社員の詳細給与台帳をハンドラーでセッティング-->
-<%@include file="../includes/header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>급여 상세 대장</title>
+</head>
+<body>
 
 <table border="1">
 	<tr>
@@ -57,4 +63,5 @@
 	</tr>
 </c:forEach>
 </table>
-<%@include file="../includes/footer.jsp"%>
+</body>
+</html>

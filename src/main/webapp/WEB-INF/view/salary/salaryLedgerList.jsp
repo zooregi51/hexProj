@@ -7,7 +7,13 @@
 <!-- 給与台帳ページ-->
 <!--ledgerMonth社員の詳細給与台帳をハンドラーでセッティング-->
 
-<%@include file="../includes/header.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>급여 대장</title>
+</head>
+<body>
 	<!-- 연도, 상세 급여 설정하는 폼 -->
 	<!-- 年度、詳細給与を設定するフォーム-->
 	<form action="salLedger.do" method="get">
@@ -52,4 +58,5 @@
 			</tr>
 		</c:forEach>
 	</table>
-<%@include file="../includes/footer.jsp"%>
+</body>
+</html>
