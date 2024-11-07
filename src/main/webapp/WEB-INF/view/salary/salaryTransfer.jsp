@@ -6,13 +6,7 @@
 <!--給与振込ページ-->
 <!-- salaries 振替されていない給与情報をハンドラーでセッティング-->
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>급여 이체</title>
-</head>
-<body>
+<%@include file="../includes/header.jsp"%>
 
 <table border="1">
 	<tr>
@@ -49,5 +43,4 @@
 <input type="submit" value="급여이체하기">
 </form>
 </c:if>
-</body>
-</html>
+<%@include file="../includes/footer.jsp"%>
