@@ -43,7 +43,7 @@
 <!-- salariesに入っている給与内訳だけ出力 --->
 <c:forEach var="salary" items="${salaries}">
 	<tr>
-		<td>${salary.getEmployee().getEmpName()}</td>
+		<td>${salary.getTransferDate()}</td>
 		<td>${salary.getEmployee().getEmpName()}</td>
 		<td>${salary.getSalPayment().getSalBasicSalary()+salary.getSalPayment().getSalFood()
 		+ salary.getSalPayment().getSalChildCare() + salary.getSalPayment().getSalPositionSalary()
