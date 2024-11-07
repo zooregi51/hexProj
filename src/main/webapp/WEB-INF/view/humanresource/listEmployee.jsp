@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-<link href="humanResourceCss.css" rel="stylesheet" type="text/css">
-<meta charset="UTF-8">
-<title>社員の現況/管理</title>
-</head>
-<body>
+<%@include file="../includes/header.jsp"%>
 <h1>社員の現況/管理</h1>
 <form action="deleteEmployee.do" method="post" id="multidelete">
 <table border="1" width="1000" height="100" align="left">
@@ -110,6 +103,4 @@ ${ctxPath = pageContext.request.contextPath ; ''}
 <button type="button" onclick="location.href='${ctxPath}/registerEmployee.do'">新規社員登録</button>
 <input type="submit" value="選択削除">
 </form>
-
-</body>
-</html>
+<%@include file="../includes/footer.jsp"%>
