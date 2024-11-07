@@ -1,80 +1,101 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
-<head>
-<title>근태 항목 관리</title>
-</head>
-<body>
-	<h2>근태 항목 관리</h2>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@include file="../includes/header.jsp"%>
 
-	<!-- 근태 항목 추가/수정 폼 -->
-	<form action="attendanceItem.do" method="post">
-		<input type="hidden" name="action"
-			value="${selectedItem != null ? 'update' : 'add'}"> <input
-			type="hidden" name="id"
-			value="${selectedItem != null ? selectedItem.id : 0}"> <label
-			for="name">근태 항목 이름:</label> <input type="text" id="name" name="name"
-			value="${selectedItem != null ? selectedItem.name : ''}" required><br>
+<h2>勤怠項目設定</h2>
 
-		<label for="unit">단위 (예: 일, 시간):</label> <input type="text" id="unit"
-			name="unit" value="${selectedItem != null ? selectedItem.unit : ''}"
-			required><br> <label for="groupCategory">그룹 관리:</label>
-		<select id="groupCategory" name="groupCategory" required>
-			<option value="휴가"
-				${selectedItem != null && selectedItem.groupCategory == '휴가' ? 'selected="selected"' : ''}>휴가</option>
-			<option value="연장근무"
-				${selectedItem != null && selectedItem.groupCategory == '연장근무' ? 'selected="selected"' : ''}>연장근무</option>
-			<option value="지각조퇴"
-				${selectedItem != null && selectedItem.groupCategory == '지각조퇴' ? 'selected="selected"' : ''}>지각조퇴</option>
-			<option value="특근"
-				${selectedItem != null && selectedItem.groupCategory == '특근' ? 'selected="selected"' : ''}>특근</option>
-			<option value="기타"
-				${selectedItem != null && selectedItem.groupCategory == '기타' ? 'selected="selected"' : ''}>기타</option>
-		</select><br> <label for="useFlag">사용 여부 (Y/N):</label> <input type="text"
-			id="useFlag" name="useFlag"
-			value="${selectedItem != null ? selectedItem.useFlag : 'Y'}" required><br>
+<!-- 근태 항목 추가/수정 폼 -->
+<!-- 勤怠項目の追加/修正フォーム -->
+<form action="attendanceItem.do" method="post">
+	<input type="hidden" name="action"
+		value="${selectedItem != null ? 'update' : 'add'}"> <input
+		type="hidden" name="id"
+		value="${selectedItem != null ? selectedItem.id : 0}">
+	<!-- 근태 항목 이름 입력 -->
+	<!-- 勤怠項目名の入力 -->
+	<label for="name">勤怠項目名:</label> <input type="text" id="name"
+		name="name" value="${selectedItem != null ? selectedItem.name : ''}"
+		required><br>
 
-		<input type="submit" value="${selectedItem != null ? '저장' : '추가'}">
-	</form>
+	<!-- 단위 입력 (예: 일, 시간) -->
+	<!-- 単位の入力 (例: 日、時間) -->
+	<label for="unit">単位 (例: 日、時間)</label> <input type="text" id="unit"
+		name="unit" value="${selectedItem != null ? selectedItem.unit : ''}"
+		required><br>
 
-	<hr>
+	<!-- 그룹 선택 -->
+	<!-- グループの選択 -->
+	<label for="groupCategory">グループ管理:</label> <select id="groupCategory"
+		name="groupCategory" required>
+		<option value="休暇"
+			${selectedItem != null && selectedItem.groupCategory == '休暇' ? 'selected="selected"' : ''}>休暇</option>
+		<option value="残業"
+			${selectedItem != null && selectedItem.groupCategory == '残業' ? 'selected="selected"' : ''}>残業</option>
+		<option value="遅刻・早退"
+			${selectedItem != null && selectedItem.groupCategory == '遅刻・早退' ? 'selected="selected"' : ''}>遅刻・早退</option>
+		<option value="特別勤務"
+			${selectedItem != null && selectedItem.groupCategory == '特別勤務' ? 'selected="selected"' : ''}>特別勤務</option>
+		<option value="その他"
+			${selectedItem != null && selectedItem.groupCategory == '"その他"' ? 'selected="selected"' : ''}>"その他"</option>
+	</select><br>
 
-	<!-- 등록된 근태 항목 목록 표시 -->
-	<h3>등록된 근태 항목</h3>
-	<table border="1">
+	<!-- 사용 여부 설정 (Y/N) -->
+	<!-- 使用有無の設定 (Y/N) -->
+	<label for="useFlag">使用有無 (Y/N):</label> <input type="text"
+		id="useFlag" name="useFlag"
+		value="${selectedItem != null ? selectedItem.useFlag : 'Y'}" required><br>
+
+	<input type="submit" value="${selectedItem != null ? '保存' : '追加'}">
+</form>
+
+<hr>
+
+<!-- 등록된 근태 항목 목록 표시 -->
+<!-- 登録済みの勤怠項目リストの表示 -->
+<h3>勤怠項目</h3>
+<table border="1">
+	<tr>
+		<th>勤怠名</th>
+		<!-- 근태 항목 이름 -->
+		<th>単位</th>
+		<!-- 단위 -->
+		<th>グループ</th>
+		<!-- 그룹 -->
+		<th>使用有無</th>
+		<!-- 사용 여부 -->
+		<th>備考</th>
+		<!-- 비고 -->
+	</tr>
+	<c:forEach var="item" items="${attendanceItems}">
 		<tr>
-			<th>이름</th>
-			<th>단위</th>
-			<th>그룹</th>
-			<th>사용 여부</th>
-			<th>작업</th>
+			<td>${item.name}</td>
+			<td>${item.unit}</td>
+			<td>${item.groupCategory}</td>
+			<td>${item.useFlag}</td>
+			<td>
+				<form action="attendanceItem.do" method="post"
+					style="display: inline;">
+					<input type="hidden" name="action" value="edit"> <input
+						type="hidden" name="id" value="${item.id}"> <input
+						type="submit" value="修正">
+				</form>
+				<form action="attendanceItem.do" method="post"
+					style="display: inline;">
+					<input type="hidden" name="action" value="delete"> <input
+						type="hidden" name="id" value="${item.id}"> <input
+						type="submit" value="削除">
+				</form>
+			</td>
 		</tr>
-		<c:forEach var="item" items="${attendanceItems}">
-			<tr>
-				<td>${item.name}</td>
-				<td>${item.unit}</td>
-				<td>${item.groupCategory}</td>
-				<td>${item.useFlag}</td>
-				<td>
-					<form action="attendanceItem.do" method="post"
-						style="display: inline;">
-						<input type="hidden" name="action" value="edit"> <input
-							type="hidden" name="id" value="${item.id}"> <input
-							type="submit" value="수정">
-					</form>
-					<form action="attendanceItem.do" method="post"
-						style="display: inline;">
-						<input type="hidden" name="action" value="delete"> <input
-							type="hidden" name="id" value="${item.id}"> <input
-							type="submit" value="삭제">
-					</form>
-				</td>
-			</tr>
-		</c:forEach>
-	</table>
+	</c:forEach>
+</table>
 
-	<c:if test="${not empty message}">
-		<p>${message}</p>
-	</c:if>
-</body>
-</html>
+<!-- 메시지가 있는 경우 표시 -->
+<!-- メッセージがある場合は表示 -->
+<c:if test="${not empty message}">
+	<p>${message}</p>
+</c:if>
+
+<%@include file="../includes/footer.jsp"%>
