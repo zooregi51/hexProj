@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사원 퇴직 처리</title>
+    <title>社員退職処理</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -40,30 +40,30 @@
 </head>
 <body>
 
-    <h2>사원 퇴직 처리</h2>
+    <h2>社員退職処理</h2>
 
     <div class="search-container">
         <form action="/retire/retireList.do" method="GET">
             <select name="schType" id="schType">
-                <option value="empNo">사원번호</option>
-                <option value="name">사원명</option>
+                <option value="empNo">社員番号</option>
+                <option value="name">氏名</option>
             </select>
             <input type="text" name="schText"  id="schText"	placeholder="검색어를 입력하세요" />
-            <button type="submit">검색</button>
+            <button type="submit">検索</button>
         </form>
     </div>
 
     <table>
         <tr>
-            <th>사원번호</th>
-            <th>성명</th>
-            <th>부서</th>
-            <th>직위</th>
-            <th>입사일</th>
+            <th>社員番号</th>
+            <th>氏名</th>
+            <th>部署</th>
+            <th>職位</th>
+            <th>入社日</th>
         </tr>
         <c:if test="${list.isEmpty()}">
             <tr>
-                <td colspan="5">사원이 없습니다.</td>
+                <td colspan="5">社員がいません</td>
             </tr>
         </c:if>
         <c:forEach var="item" items="${list}">

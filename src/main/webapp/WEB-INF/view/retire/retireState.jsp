@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>퇴사자 퇴직처리 취소</title>
+    <title>退社者退職処理キャンセル</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,28 +65,28 @@
     </style>
 </head>
 <body>
-    <h2>퇴사자 퇴직처리 취소</h2>
+    <h2>退社者退職処理キャンセル</h2>
     <form action="/retire/retireState.do" method="POST" id="retireStateForm">
         <input type="hidden" name="empNo" id="empNo" value="${param.empNo}"/>
         <table>
             <tr>
-                <td>퇴직구분</td>
+                <td>退職区分</td>
                 <td>
                     <select id="retiredForm" name="retiredForm">
-                        <option value="retirementage">정년퇴직</option>
-                        <option value="redundancy">정리해고</option>
-                        <option value="voluntaryretire">자발적 퇴직</option>
-                        <option value="retirementofexecutives">임원 퇴작</option>
-                        <option value="interimsettlement">중간 정산</option>
+                        <option value="retirementage">定年退職</option>
+                        <option value="redundancy">リストラ</option>
+                        <option value="voluntaryretire">自発的退職</option>
+                        <option value="retirementofexecutives">役員退職</option>
+                        <option value="interimsettlement">中間精算</option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td>퇴직일자</td>
+                <td>退職日</td>
                 <td><input type="date" id="retiredDate" name="retiredDate"></td>
             </tr>
             <tr>
-                <td>퇴직 후 연락처</td>
+                <td>退職後の連絡先</td>
                 <td><input type="text" id="retiredPhonenum" name="retiredPhonenum" placeholder="예: 010-1234-5678"></td>
             </tr>
         </table>
@@ -103,12 +103,12 @@
 
             // 항목 null 값 체크
             if (!retiredForm || !retiredDate || !retiredPhonenum) {
-                alert("퇴사 정보를 모두 기입해주세요.");
+                alert("退社情報をすべて記入してください.");
                 return;
             }
             
             //저장 실행
-            if(confirm("정말로 퇴직처리를 하시겠습니까?")){
+            if(confirm("本当に退職扱いにしますか")){
                 document.getElementById("retireStateForm").submit();
             }
         }
