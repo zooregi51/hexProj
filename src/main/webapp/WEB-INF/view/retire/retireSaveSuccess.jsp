@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>www.payzon.co.kr의 메세지</title>
+<title>www.payzon.co.krメッセージ</title>
 </head>
 <body>
- 	<h1>퇴직 처리에 성공하였습니다. </h1>
+ 	<h1>退職の処理に成功しました.</h1>
 </body>
 </html>

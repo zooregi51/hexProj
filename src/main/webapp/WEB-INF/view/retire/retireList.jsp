@@ -48,7 +48,7 @@
                 <option value="empNo">社員番号</option>
                 <option value="name">氏名</option>
             </select>
-            <input type="text" name="schText"  id="schText"	placeholder="검색어를 입력하세요" />
+            <input type="text" name="schText"  id="schText"	placeholder="検索語を入力してください" />
             <button type="submit">検索</button>
         </form>
     </div>
