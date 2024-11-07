@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -39,7 +40,7 @@
     </style>
 </head>
 <body>
-
+<%@include file="../includes/header.jsp"%>
     <h2>社員退職処理</h2>
 
     <div class="search-container">
@@ -84,5 +85,4 @@
             window.open("/retire/retireState.do?empNo="+_empNo, "retireState", "width=550,height=400");
         }
     </script>
-</body>
-</html>
+    <%@include file="../includes/footer.jsp"%>
