@@ -5,7 +5,7 @@
 <%@include file="../includes/header.jsp"%>
 
 <style>
-div {
+.my-special-div {
 	display: flex;
 	/* 페이지를 두 개의 컨테이너로 나누기 위해 flex 사용 / ページを2つのコンテナに分けるためにflexを使用 */
 }
@@ -52,7 +52,7 @@ th {
 }
 </style>
 
-<div>
+<div class="my-special-div">
 	<div class="table-container">
 		<h2>근태 기록 관리 / 勤怠記録管理</h2>
 		<table>

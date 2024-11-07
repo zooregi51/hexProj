@@ -1,9 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %> <!-- 페이지 콘텐츠 타입을 UTF-8로 설정하여 인코딩 문제를 방지합니다 / ページのコンテンツタイプをUTF-8に設定し、エンコーディングの問題を防ぎます -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- JSTL의 core 태그 라이브러리를 사용하기 위해 선언합니다 / JSTLのcoreタグライブラリを使用するために宣言します -->
 
-<html>
-<head>
-    <title>휴가 조회 / 休暇照会</title> <!-- 페이지의 제목을 '휴가 조회'로 설정합니다 / ページのタイトルを「休暇照会」に設定します -->
+<%@include file="../includes/header.jsp"%>
+    
     <style>
         table {
             width: 100%; /* 테이블이 페이지의 100% 너비를 차지하도록 설정합니다 / テーブルがページの100％の幅を占めるように設定します */
@@ -24,8 +23,7 @@
             window.location.href = "/attendance/leaveRecordDetail.do?empno=" + empno; /* 클릭한 사원 번호를 쿼리 매개변수로 전달하여 URL에 추가합니다 / クリックした社員番号をクエリパラメータとしてURLに追加します */
         }
     </script>
-</head>
-<body>
+
     <h2>휴가 조회 / 休暇照会</h2> <!-- 페이지에 표시되는 제목으로, '휴가 조회'를 표시합니다 / ページに表示されるタイトルとして「休暇照会」を表示します -->
     <table>
         <thead>
@@ -52,5 +50,5 @@
             </c:forEach>
         </tbody>
     </table>
-</body>
-</html>
+
+<%@include file="../includes/footer.jsp"%>
