@@ -131,7 +131,7 @@ public class SalaryManageHandler implements CommandHandler {
 		}
 
 		else if (req.getMethod().equalsIgnoreCase("POST")) {
-			int empno = Integer.parseInt((String) req.getParameter("empno"));
+			Integer empno = Integer.parseInt((String) req.getParameter("empno"));
 			String type = (String) req.getParameter("type");
 			String salNum = now.getYear() + "-" + (now.getMonthValue() >= 10 ? now.getMonthValue() : "0" + now.getMonthValue()) + "-" + empno;
 			
