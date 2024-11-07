@@ -14,28 +14,28 @@
 		<!-- 연도는 2005년 부터 현재 년도까지 검색 가능 -->
 		<!-- 年度は2005年から現在年度まで検索可能 -->
 		<select name="year">
-			<option value="">선택</option>
+			<option value="">選択</option>
 			<jsp:useBean id="now" class="java.util.Date" />
 			<fmt:formatDate value="${now}" pattern="yyyy" var="startYear" />
 			<c:forEach begin="0" end="${startYear - 2005}" var="year" step="1">
 				<option value="${startYear-year}">${startYear-year}</option>
 			</c:forEach>
 		</select>
-		<input type="submit" value="검색">
+		<input type="submit" value="検索">
 	</form>
 	<table border="1">
 		<tr>
-			<td>귀속연월</td>
-			<td>정산기간</td>
-			<td>지급일</td>
-			<td>인원</td>
-			<td>지급총액</td>
+			<td>帰属年月</td>
+			<td>精算期間</td>
+			<td>支払日</td>
+			<td>人数</td>
+			<td>支払総額</td>
 		</tr>
 		<!-- ledgerMonth가 비어있으면 급여 대장 내역이 없음을 출력 -->
 		<!--ledgerMonthが空だと給与台帳の内訳がないことを出力-->
 		<c:if test="${ledgerMonth.isEmpty()}">
 			<tr>
-				<td colspan="4">급여대장 내역이 없습니다.</td>
+				<td colspan="4">給与台帳の内訳がありません。</td>
 			</tr>
 		</c:if>
 		<!-- ledgerMonth에 들어있는 급여 대장 내역만큼 출력 -->

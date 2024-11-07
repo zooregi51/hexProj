@@ -6,8 +6,8 @@
 <!--給与失敗時に移動されるページ-->
 <%@include file="../includes/header.jsp"%>
 
-저장에 실패했습니다.
+保存に失敗しました。
 <br>
 ${ctxPath = pageContext.request.contextPath ; ''}
-<a href="${ctxPath}/salary/salaryManage.do">[급여 관리 화면으로 이동]</a>
+<a href="${ctxPath}/salary/salaryManage.do">[給与管理画面に移動]</a>
 <%@include file="../includes/footer.jsp"%>

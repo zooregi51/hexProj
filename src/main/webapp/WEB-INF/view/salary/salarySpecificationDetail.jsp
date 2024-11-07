@@ -35,60 +35,60 @@ th {
 </style>
 <!-- 특정 사원의 상세 급여 명세서를 테이블로 생성해서 보여줌 -->
 <!-- 特定社員の詳細給与明細書をテーブルで生成して見せる -->
-	<h1>${specDetail.getSalNum().substring(0, 4)} 년 ${specDetail.getSalNum().substring(5, 7)} 월 급여 명세서</h1>
+	<h1>${specDetail.getSalNum().substring(0, 4)} 년 ${specDetail.getSalNum().substring(5, 7)} 月給明細書</h1>
 	<table>
 		<tr>
-			<th>성명</th>
+			<th>姓名</th>
 			<td>${specDetail.getEmployee().getEmpName()}</td>
 			<th></th>
 			<td></td>
 		</tr>
 		<tr>
-			<th>부서</th>
+			<th>部署</th>
 			<td>${specDetail.getEmployee().getEmpDepart()}</td>
-			<td>직급</td>
+			<td>職級</td>
 			<td>${specDetail.getEmployee().getEmpPos()}</td>
 		</tr>
 		<tr>
-			<th>입사일</th>
+			<th>入社日</th>
 			<td>${specDetail.getEmployee().getEmpHiredDate()}</td>
-			<th>급여 지급일</th>
+			<th>給与支給日</th>
 			<td>${specDetail.getTransferDate()}</td>
 		</tr>
 	</table>
 
-	<h2>급여내역</h2>
+	<h2>給与内訳</h2>
 	<table>
 		<thead>
 			<tr>
-				<th>항목명</th>
-				<th>금액</th>
-				<th>산출식 또는 산출방법</th>
+				<th>項目名</th>
+				<th>金額</th>
+				<th>算出式又は算出方法</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr>
-				<td>기본급</td>
+				<td>基本給</td>
 				<td>${specDetail.getSalPayment().getSalBasicSalary()}</td>
 				<td></td>
 			</tr>
 			<c:if test="${specDetail.getSalPayment().getSalFood() != 0}">
 				<tr>
-					<td>식비</td>
+					<td>食費</td>
 					<td>${specDetail.getSalPayment().getSalFood()}</td>
 					<td></td>
 				</tr>
 			</c:if>
 			<c:if test="${specDetail.getSalPayment().getSalChildCare() != 0}">
 				<tr>
-					<td>보육비</td>
+					<td>保育費</td>
 					<td>${specDetail.getSalPayment().getSalChildCare()}</td>
 					<td></td>
 				</tr>
 			</c:if>
 			<c:if test="${specDetail.getSalPayment().getSalPositionSalary() != 0}">
 				<tr>
-					<td>직책수당</td>
+					<td>職責手当</td>
 					<td>${specDetail.getSalPayment().getSalPositionSalary()}</td>
 					<td></td>
 				</tr>
@@ -102,32 +102,32 @@ th {
 			</c:if>
 			<c:if test="${specDetail.getSalPayment().getSalOncall() != 0}">
 				<tr>
-					<td>당직수당</td>
+					<td>勤続手当</td>
 					<td>${specDetail.getSalPayment().getSalOncall()}</td>
 					<td></td>
 				</tr>
 			</c:if>
 			<c:if test="${specDetail.getSalPayment().getSalBonus() != 0}">
 				<tr>
-					<td>상여금</td>
+					<td>ボーナス</td>
 					<td>${specDetail.getSalPayment().getSalBonus()}</td>
 					<td></td>
 				</tr>
 			</c:if>
 			<c:if test="${specDetail.getSalPayment().getSalHoliday() != 0}">
 				<tr>
-					<td>휴일수당</td>
+					<td>休日手当</td>
 					<td>${specDetail.getSalPayment().getSalHoliday()}</td>
 					<td></td>
 				</tr>
 			</c:if>
 			<tr>
-				<td class="highlight">합계</td>
+				<td class="highlight">合計</td>
 				<td class="highlight">${specDetail.getSalPayment().getSumPayment()}</td>
 				<td></td>
 			</tr>
 		</tbody>
 
 	</table>
-	<p>귀하의 노고에 감사드리며, 수고 많으셨습니다.</p>
+	<p>貴下の苦労に感謝し、ご苦労様でした。</p>
 <%@include file="../includes/footer.jsp"%>
