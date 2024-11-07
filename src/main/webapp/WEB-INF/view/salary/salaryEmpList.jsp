@@ -11,17 +11,17 @@
 <%@include file="../includes/header.jsp"%>
 	<table border="1">
 		<tr>
-			<td>구분</td>
-			<td>사원번호</td>
-			<td>성명</td>
-			<td>부서</td>
-			<td>직위</td>
+			<td>区分</td>
+			<td>社員番号</td>
+			<td>姓名</td>
+			<td>部署</td>
+			<td>職位</td>
 		</tr>
 		<!-- emps가 비어있다면 급여가 미입력된 사원이 없습니다를 출력 -->
 		<!-- empsが空の場合、給与が未入力の社員がいませんを出力-->
 		<c:if test="${emps.isEmpty()}">
 			<tr>
-				<td colspan="4">급여가 미입력된 사원이 없습니다.</td>
+				<td colspan="4">給与が未入力の社員がいません。</td>
 			</tr>
 		</c:if>
 		<!-- emps에 들어있는 사원 수 만큼 사원 정보를 출력 -->

@@ -18,44 +18,44 @@
 		<!-- 연도는 2005년 부터 현재 년도까지 검색 가능 -->
 		<!-- 年度は2005年から現在年度まで検索可能 -->
 		<select name="year">
-			<option value="">선택</option>
+			<option value="">選択</option>
 			<jsp:useBean id="now" class="java.util.Date" />
 			<fmt:formatDate value="${now}" pattern="yyyy" var="startYear" />
 			<c:forEach begin="0" end="${startYear - 2005}" var="year" step="1">
 				<option value="${startYear-year}">${startYear-year}</option>
 			</c:forEach>
-		</select> 년 
+		</select> 년/年 
 		<!-- 상세 급여 8가지 상세급여 중 하나 선택 가능 -->
 		<!-- 詳細給与8つの詳細給与の中から1つを選択可能-->
 		<select name="item">
-			<option value="salary">기본급</option>
-            <option value="food">식비</option>
-            <option value="childcare">보육수당</option>
-            <option value="position_allowance">직책수당</option>
-            <option value="continuos_service">근속수당</option>
-            <option value="nightduty">당직수당</option>
-            <option value="bonus">상여금</option>
-            <option value="holiday">휴일수당</option>
+			<option value="salary">基本給</option>
+            <option value="food">食費</option>
+            <option value="childcare">保育手当</option>
+            <option value="position_allowance">職責手当</option>
+            <option value="continuos_service">勤続手当</option>
+            <option value="nightduty">当直手当</option>
+            <option value="bonus">ボーナス</option>
+            <option value="holiday">休日手当</option>
           </select>
-		<input type="submit" value="검색">
+		<input type="submit" value="検索">
 	</form>
 
 	<table border="1">
 		<tr>
-			<td>구분</td>
-			<td>성명</td>
-			<td>부서</td>
-			<td>직위</td>
+			<td>区分</td>
+			<td>姓名</td>
+			<td>部署</td>
+			<td>職位</td>
 			<c:forEach var="month" begin="1" end="12">
 				<td>${year}-${month}</td>
 			</c:forEach>
-			<td>합계</td>
+			<td>合計</td>
 		</tr>
 		<!-- itemizedLedger가 비어있으면 급여 목록이 없음을 출력 -->
 		<!-- itemized Ledgerが空いていれば給与リストがないことを出力-->
 		<c:if test="${itemizedLedger.isEmpty()}">
 			<tr>
-				<td colspan="4">급여 목록이 없습니다.</td>
+				<td colspan="4">給与リストがありません。</td>
 			</tr>
 		</c:if>
 		<!-- 월 단위 합과 총 합을 계산하기 위한 스크립트 -->
@@ -90,7 +90,7 @@
                  out.print("<td>" + total + "</td>");
                  out.print("</tr>");
 			}
-			out.print("<tr><td>합계</td><td></td><td></td><td></td>");
+			out.print("<tr><td>合計</td><td></td><td></td><td></td>");
 			// 월별 합 및 총합 출력
 			// 月別合計及び総合計出力
 			int total = 0;

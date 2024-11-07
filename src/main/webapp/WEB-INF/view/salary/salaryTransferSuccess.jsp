@@ -7,8 +7,8 @@
 
 <%@include file="../includes/header.jsp"%>
 
-이체에 성공했습니다.
+振込に成功しました。
 <br>
 ${ctxPath = pageContext.request.contextPath ; ''}
-<a href="${ctxPath}/salary/salaryTransferCheck.do">[이체 내역 확인 으로 이동]</a>
+<a href="${ctxPath}/salary/salaryTransferCheck.do">[振込内訳の確認に移動]</a>
 <%@include file="../includes/footer.jsp"%>

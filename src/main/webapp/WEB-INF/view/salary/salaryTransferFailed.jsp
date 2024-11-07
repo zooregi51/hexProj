@@ -6,8 +6,8 @@
 <!--給与振込失敗時に移動されるページ-->
 <%@include file="../includes/header.jsp"%>
 
-이체에 실패했습니다.
+振込に失敗しました。
 <br>
 ${ctxPath = pageContext.request.contextPath ; ''}
-<a href="${ctxPath}/salary/salaryTransfer.do">[이체 화면으로 이동]</a>
+<a href="${ctxPath}/salary/salaryTransfer.do">[振替画面へ移動]</a>
 <%@include file="../includes/footer.jsp"%>

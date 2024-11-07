@@ -10,16 +10,16 @@
 
 <table border="1">
 	<tr>
-		<td>성명</td>
-		<td>부서</td>
-		<td>직위</td>
-		<td>실지급액</td>
+		<td>姓名</td>
+		<td>部署</td>
+		<td>職位</td>
+		<td>実支給額</td>
 	</tr>
 	<!-- salaries가 비어있으면 급여 목록이 없음을 출력 -->
 	<!-- salariesが空いていれば給与目録がないことを出力-->
 <c:if test="${salaries.isEmpty()}">
 	<tr>
-		<td colspan="4">이체할 급여가 없습니다.</td>
+		<td colspan="4">振込する給与がありません。</td>
 	</tr>
 </c:if>
 <!-- salaries에 들어있는 급여 내역만큼 출력 -->
@@ -40,7 +40,7 @@
 <!-- salariesが空いていなければ振り替えられるボタンを出力-->
 <c:if test="${!salaries.isEmpty()}">
 <form action="salaryTransfer.do" method="post">
-<input type="submit" value="급여이체하기">
+<input type="submit" value="給与振替">
 </form>
 </c:if>
 <%@include file="../includes/footer.jsp"%>

@@ -14,14 +14,14 @@
 	<form action="salarySpec.do" method="get">
 		<!-- 연도는 2005년 부터 현재 년도까지 검색 가능 -->
 		<!-- 年度は2005年から現在年度まで検索可能 -->
-		<label>조회기간</label> <select name="year">
-			<option value="">선택</option>
+		<label>照会期間</label> <select name="year">
+			<option value="">選択</option>
 			<jsp:useBean id="now" class="java.util.Date" />
 			<fmt:formatDate value="${now}" pattern="yyyy" var="startYear" />
 			<c:forEach begin="0" end="${startYear - 2005}" var="year" step="1">
 				<option value="${startYear-year}">${startYear-year}</option>
 			</c:forEach>
-		</select> 년
+		</select> 年
 		<!-- 달 선택 --> 
 		<!--月選択-->
 		<select name="month">
@@ -37,20 +37,20 @@
             <option value="10">10</option>
             <option value="11">11</option>
             <option value="12">12</option>
-		</select>월 <input type="submit" value="검색">
+		</select>月 <input type="submit" value="検索">
 	</form>
 
 	<table border="1">
 		<tr>
-			<td>구분</td>
-			<td>성명</td>
-			<td>실지급액</td>
+			<td>区分</td>
+			<td>氏名</td>
+			<td>実支給額</td>
 		</tr>
 		<!-- specs가 비어있으면 급여 목록이 없음을 출력 -->
 		<!--specsが空いていれば給与目録がないことを出力-->
 		<c:if test="${specs.isEmpty()}">
 			<tr>
-				<td colspan="4">이체된 급여가 없습니다.</td>
+				<td colspan="4">振り替えられた給与がありません。</td>
 			</tr>
 		</c:if>
 		<!-- specs에 들어있는 급여 내역만큼 출력 -->

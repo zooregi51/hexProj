@@ -11,7 +11,7 @@
 <!-- 期間設定するフォーム --->
 <!--開始日、終了日の設定-->
 <form action="salaryTransferCheck.do" method="get">
-	<label>조회기간</label>
+	<label>照会期間</label>
 	<input type="date"
         name="stDate"
         max="2077-12-31"
@@ -21,22 +21,22 @@
         name="edDate"
         max="2077-12-31"
         min="2000-01-01"/>
-    <input type="submit" value="검색">
+    <input type="submit" value="検索">
 </form>
 
 
 <table border="1">
 	<tr>		
-		<td>이체일자</td>
-		<td>예금주</td>
-		<td>이체금액</td>
-		<td>처리결과</td>
+		<td>振替日付</td>
+		<td> 預金者 </td>
+		<td>振込金額</td>
+		<td>処理結果</td>
 	</tr>
 	<!-- salaries가 비어있으면 급여 목록이 없음을 출력 -->
 	<!-- salariesが空いていれば給与目録がないことを出力-->
 <c:if test="${salaries.isEmpty()}">
 	<tr>
-		<td colspan="4">급여이체 데이터가 없습니다.</td>
+		<td colspan="4">給与振替データがありません。</td>
 	</tr>
 </c:if>
 <!-- salaries에 들어있는 급여 내역만큼 출력 -->
@@ -49,7 +49,7 @@
 		+ salary.getSalPayment().getSalChildCare() + salary.getSalPayment().getSalPositionSalary()
 		+ salary.getSalPayment().getSalPositionSalary() + salary.getSalPayment().getSalLongService()
 		+ salary.getSalPayment().getSalOncall() + salary.getSalPayment().getSalHoliday()}</td>		
-		<td>이체완료</td>
+		<td>振替完了</td>
 	</tr>
 </c:forEach>
 </table>
