@@ -1,8 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" %> <!-- 페이지의 콘텐츠 타입과 인코딩 설정 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> <!-- JSTL 태그 라이브러리 선언 -->
-<html>
-<head>
-    <title>휴가 조회 상세 / 休暇照会詳細</title> <!-- 페이지 제목 설정 -->
+<%@include file="../includes/header.jsp"%>
+
+    
     <style>
         table {
             width: 100%; /* 테이블의 전체 너비를 설정 / テーブルの全幅を設定 */
@@ -17,8 +17,7 @@
             background-color: #f2f2f2; /* 헤더 배경색 설정 / ヘッダーの背景色を設定 */
         }
     </style>
-</head>
-<body>
+
     <h2>휴가 조회 상세 / 休暇照会詳細</h2> <!-- 페이지 제목 표시 -->
     <table>
         <thead>
@@ -50,5 +49,5 @@
             </c:forEach>
         </tbody>
     </table>
-</body>
-</html>
+
+<%@include file="../includes/footer.jsp"%>
